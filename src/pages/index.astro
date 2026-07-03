@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LeafDefs from "../components/LeafDefs.astro";
+import Background from "../components/Background.astro";
+import Header from "../components/Header.astro";
+import RailNav from "../components/RailNav.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import PathSection from "../components/sections/PathSection.astro";
+import WorkSection from "../components/sections/WorkSection.astro";
+import GiveSection from "../components/sections/GiveSection.astro";
+import WinsSection from "../components/sections/WinsSection.astro";
+import SanctumSection from "../components/sections/SanctumSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import PagerNav from "../components/PagerNav.astro";
+---
+
+<Layout>
+  <div
+    data-root
+    data-screen-label="Portfolio"
+    style="position:relative;height:100vh;width:100%;overflow:hidden;background:var(--bg-grad);color:var(--text);font-family:var(--f-body);display:flex;flex-direction:column"
+  >
+    <LeafDefs />
+    <Background />
+    <Header />
+
+    <!-- main : vine nav + stage -->
+    <div style="position:relative;z-index:10;flex:1;min-height:0;display:flex">
+      <RailNav />
+      <section
+        data-stage
+        style="flex:1;min-height:0;position:relative;overflow:hidden"
+      >
+        <AboutSection />
+        <PathSection />
+        <WorkSection />
+        <GiveSection />
+        <WinsSection />
+        <SanctumSection />
+        <ContactSection />
+      </section>
+    </div>
+
+    <!-- mobile / tablet : page-turner nav + jump-to-chapter sheet -->
+    <PagerNav />
+  </div>
+
+  <script>
+    import "../scripts/portfolio";
+  </script>
+</Layout>

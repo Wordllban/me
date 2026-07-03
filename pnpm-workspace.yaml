@@ -1,0 +1,8 @@
+# pnpm 11 reads project settings from here (no longer from package.json's "pnpm" field).
+# Allow the prebuilt-binary packages Astro needs to run their install scripts.
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+# Skip pnpm's auto "is the lockfile in sync" check before `pnpm run` scripts.
+verifyDepsBeforeRun: false

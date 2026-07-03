@@ -1,0 +1,50 @@
+---
+// Top bar: the Ivy sigil (clickable easter egg), name, status, founding year.
+---
+
+<header
+  data-topbar
+  style="position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px clamp(20px,3.5vw,42px);border-bottom:1px solid var(--border);flex:0 0 auto"
+  class="tt"
+>
+  <div
+    style="display:flex;align-items:center;gap:13px;font-weight:600;letter-spacing:.02em"
+  >
+    <span
+      data-logo-click
+      title="the Ivy sigil"
+      style="position:relative;display:inline-grid;place-items:center;width:38px;height:38px;cursor:pointer"
+    >
+      <span
+        style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"
+      ></span>
+      <img
+        data-medallion
+        data-logo-leaf
+        src="/assets/ivy-logo.png"
+        alt="Ivy"
+        style="position:relative;width:34px;height:34px;border-radius:10px;box-shadow:0 0 0 1px var(--border),0 4px 14px -4px rgba(168,92,255,.7)"
+      />
+    </span>
+    <span
+      data-brandname
+      style="font-family:var(--f-display);font-size:19px;letter-spacing:.04em"
+      >Kostiantyn&nbsp;Mininkov</span
+    >
+  </div>
+  <div style="display:flex;align-items:center;gap:18px">
+    <span
+      data-status
+      style="font-family:var(--f-mono);font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:8px;letter-spacing:.04em"
+    >
+      <span
+        style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 11px var(--gold);animation:pulse 2.4s ease-in-out infinite"
+      ></span>open&nbsp;to&nbsp;quests
+    </span>
+    <span
+      data-est
+      style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;padding-left:14px;border-left:1px solid var(--border)"
+      >Est.&nbsp;MMXVIII</span
+    >
+  </div>
+</header>

@@ -19,6 +19,7 @@ The file provides guidance to coding agents when working within this code base.
 - Astro
 - TypeScript
 - Tailwind CSS
+- Other support libs (animations, etc)
 
 ### General rules - CRITICAL IMPORTANT
 

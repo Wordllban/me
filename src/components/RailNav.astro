@@ -1,0 +1,97 @@
+---
+import { sectionMeta, vineAmps, buildVinePath } from "../data/portfolio";
+
+const vinePath = buildVinePath();
+const activeKey = "about";
+---
+
+<aside
+  data-rail
+  style="flex:0 0 clamp(290px,29vw,392px);min-height:0;display:flex;flex-direction:column;padding:clamp(16px,2.4vh,34px) 28px;border-right:1px solid var(--border);position:relative;overflow:hidden"
+  class="tt"
+>
+  <div style="margin-bottom:clamp(10px,1.6vh,20px);flex:0 0 auto">
+    <div
+      style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px"
+    >
+      Software Engineer · Co-Founder
+    </div>
+    <p style="color:var(--text-dim);font-size:14.5px;line-height:1.55;margin:0">
+      I build thoughtful products end to end — fullstack, increasingly with AI.
+      Six years in, I care most about shipping things that genuinely help people
+      — and I co-founded Ivy, a platform for artists and the people who
+      commission them.
+    </p>
+  </div>
+
+  <nav
+    aria-label="Sections"
+    style="position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:0;padding-left:10px"
+  >
+    <svg
+      viewBox="0 0 52 1000"
+      preserveAspectRatio="none"
+      style="position:absolute;left:0;top:0;bottom:0;height:100%;width:52px;overflow:visible;pointer-events:none;z-index:0"
+    >
+      <path
+        data-vine
+        d={vinePath}
+        fill="none"
+        stroke="var(--vine)"
+        stroke-width="3"
+        stroke-linecap="round"
+        opacity=".55"></path>
+    </svg>
+
+    {
+      sectionMeta.map((it, i) => (
+        <button
+          class="nav-item"
+          data-nav={it.key}
+          data-active={it.key === activeKey ? "" : undefined}
+          style={`--leaf-dx:${vineAmps[i]}px;--leaf-rot:${i % 2 === 0 ? -14 : 14}deg`}
+        >
+          <span class="nav-dagger-outline" />
+          <span class="nav-dagger-fill" />
+          <span class="nav-leaf-wrap">
+            <svg viewBox="0 0 100 100" class="nav-leaf">
+              <use href="#ivy-leaf" />
+            </svg>
+          </span>
+          <span style="position:relative;z-index:1;display:flex;flex-direction:column;line-height:1.08;min-width:0">
+            <span class="nav-label">
+              <span style="font-family:var(--f-mono);font-size:11px;opacity:.6;margin-right:7px">
+                {it.n}
+              </span>
+              {it.label}
+            </span>
+            <span style="font-family:var(--f-mono);font-size:11px;color:var(--text-faint);letter-spacing:.02em;white-space:nowrap">
+              {it.desc}
+            </span>
+          </span>
+        </button>
+      ))
+    }
+  </nav>
+
+  <div
+    style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)"
+  >
+    <a
+      href="https://github.com/Wordllban"
+      target="_blank"
+      rel="noopener"
+      style="text-decoration:none">github</a
+    >
+    <a
+      href="https://www.linkedin.com/in/kostiantyn-mininkov/"
+      target="_blank"
+      rel="noopener"
+      style="text-decoration:none">linkedin</a
+    >
+    <a href="mailto:mininkov1337@gmail.com" style="text-decoration:none"
+      >email</a
+    >
+    <span style="margin-left:auto;opacity:.7">↑↓ / click</span>
+  </div>
+</aside>

@@ -1,0 +1,52 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+import { giving } from "../../data/portfolio";
+---
+
+<div class="section" data-section="give">
+  <SectionHeader
+    title="Talks, open source & care."
+    rune="IV · The Order"
+    marginBottom="20px"
+  />
+  <div
+    data-body
+    data-give-grid
+    style="flex:1;min-height:0;overflow-y:auto;padding-right:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-content:start"
+  >
+    {
+      giving.map((g) => (
+        <article
+          class="tt"
+          style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:22px"
+        >
+          <div style="font-size:24px;margin-bottom:12px">{g.emoji}</div>
+          <div style="font-family:var(--f-mono);font-size:10.5px;color:var(--accent-2);margin-bottom:6px;letter-spacing:.08em">
+            {g.kind}
+          </div>
+          <h3 style="font-family:var(--f-display);font-size:18px;margin:0 0 8px;line-height:1.2">
+            {g.title}
+          </h3>
+          <p style="color:var(--text-dim);font-size:13.5px;margin:0;line-height:1.6">
+            {g.note}
+          </p>
+          {g.href && (
+            <>
+              <span style="position:absolute;top:16px;right:16px;font-family:var(--f-mono);font-size:13px;color:var(--text-faint)">
+                ↗
+              </span>
+              <a
+                class="give-card-link"
+                href={g.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={g.title}
+                style="position:absolute;inset:0;border-radius:var(--radius)"
+              />
+            </>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,725 @@
+@import "tailwindcss";
+
+/* ===== Dark Fantasy portfolio — design tokens (the "arcade" theme) ===== */
+:root {
+  --bg: #0b0812;
+  --bg-grad: radial-gradient(
+    125% 105% at 72% -12%,
+    #191024 0%,
+    #0c0814 52%,
+    #060409 100%
+  );
+  --panel: rgba(28, 20, 42, 0.55);
+  --panel-2: rgba(124, 77, 255, 0.1);
+  --border: rgba(176, 138, 86, 0.3);
+  --border-2: rgba(150, 90, 255, 0.32);
+  --text: #ece2d2;
+  --text-dim: #b3a48c;
+  --text-faint: #7b6e5b;
+  --accent: #a85cff;
+  --accent-2: #d8b46a;
+  --gold: #d8b46a;
+  --ember: #e0673b;
+  --leaf: #79c98f;
+  --leaf-2: #a9e6ba;
+  --vine: #6b4f8f;
+  --vein: rgba(220, 200, 150, 0.5);
+  --grid: rgba(140, 100, 200, 0.1);
+  --glow1: rgba(150, 60, 255, 0.3);
+  --glow2: rgba(216, 180, 106, 0.13);
+  --radius: 3px;
+  --shadow:
+    0 0 0 1px rgba(176, 138, 86, 0.16), 0 30px 60px -28px rgba(60, 20, 90, 0.7);
+  --f-display: "Cinzel", serif;
+  --f-body: "EB Garamond", Georgia, serif;
+  --f-mono: "JetBrains Mono", monospace;
+  --grid-op: 1;
+  --glow-op: 1;
+  --scan-op: 0.4;
+  --bracket-op: 1;
+  --chip-bg: rgba(124, 77, 255, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+a {
+  color: inherit;
+}
+
+.tt {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    fill 0.5s ease,
+    stroke 0.5s ease;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(16px, -12px);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: rotate(calc(var(--rot, 0deg) + 4deg)) translateY(-2px);
+  }
+}
+@keyframes tremble {
+  0%,
+  100% {
+    transform: rotate(0) translate(0, 0);
+  }
+  15% {
+    transform: rotate(-4deg) translate(-1px, 1px);
+  }
+  30% {
+    transform: rotate(4deg) translate(1px, -1px);
+  }
+  45% {
+    transform: rotate(-3deg);
+  }
+  60% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-1.5deg);
+  }
+}
+@keyframes flick {
+  0%,
+  100% {
+    opacity: 0.62;
+    filter: drop-shadow(0 0 2px var(--gold));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 7px var(--gold));
+  }
+}
+@keyframes haze {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+@keyframes chIn {
+  0% {
+    opacity: 0;
+    transform: translateX(26px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+[data-medallion].sense {
+  animation: tremble 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+[data-body]::-webkit-scrollbar {
+  width: 7px;
+}
+[data-body]::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+[data-body] {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* ===== vine navigation (desktop rail) ===== */
+.nav-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 4px 26px 4px 7px;
+  text-align: left;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+.nav-dagger-outline,
+.nav-dagger-fill {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 50%,
+    calc(100% - 16px) 100%,
+    0 100%
+  );
+  display: none;
+}
+.nav-dagger-outline {
+  top: -4px;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  background: var(--gold);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 30%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 30%);
+}
+.nav-dagger-fill {
+  top: -2.5px;
+  bottom: -2.5px;
+  left: 1.5px;
+  right: 1.5px;
+  background: linear-gradient(var(--chip-bg), var(--chip-bg)), var(--bg);
+}
+.nav-item[data-active] .nav-dagger-outline,
+.nav-item[data-active] .nav-dagger-fill {
+  display: block;
+}
+.nav-leaf-wrap {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  transform: translateX(var(--leaf-dx, 0));
+}
+.nav-leaf {
+  width: 21px;
+  height: 21px;
+  transform: rotate(var(--leaf-rot, 0deg));
+  opacity: 0.72;
+  filter: none;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+.nav-item[data-active] .nav-leaf {
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+  filter: drop-shadow(0 0 8px var(--leaf));
+}
+.nav-label {
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+.nav-item[data-active] .nav-label {
+  color: var(--text);
+}
+
+/* ===== stage sections ===== */
+.section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(26px, 4vw, 56px);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  z-index: 1;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.section[data-active] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* hover affordances ported from style-hover attributes */
+.work-card.tt:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.give-card-link:hover {
+  border: 1px solid var(--accent);
+}
+.cv-btn {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    filter 0.3s ease;
+}
+.cv-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: radial-gradient(
+    120% 80% at 50% -20%,
+    rgba(255, 255, 255, 0.22),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.cv-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(216, 180, 106, 0.95);
+  filter: brightness(1.05);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.16) inset,
+    0 16px 30px -12px rgba(110, 50, 200, 1),
+    0 0 22px -4px rgba(216, 180, 106, 0.55);
+}
+.email-row:hover {
+  border-color: var(--accent);
+  background: rgba(124, 77, 255, 0.18);
+}
+.channel-row {
+  will-change: transform;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.channel-row:hover {
+  border-color: var(--accent);
+  transform: translateX(7px);
+  background: rgba(124, 77, 255, 0.13);
+  box-shadow:
+    0 10px 26px -12px rgba(168, 92, 255, 0.75),
+    inset 0 0 0 1px rgba(168, 92, 255, 0.28);
+}
+
+/* ===== Sanctum bento : click a card → it blooms into a 2×2 photo well ===== */
+.sanctum-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: hidden;
+  box-shadow: none;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+  will-change: transform;
+}
+.sanctum-card[data-open] {
+  grid-column: span 2;
+  grid-row: span 2;
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.sanctum-id {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--panel);
+  transition:
+    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sanctum-card[data-open] .sanctum-id {
+  width: calc(50% - 6px);
+  height: calc(50% - 6px);
+}
+.sanctum-cue {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: color 0.3s ease;
+}
+.sanctum-card[data-open] .sanctum-cue {
+  color: var(--accent-2);
+}
+.sanctum-well {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  width: calc(50% - 6px);
+  height: calc(50% - 6px);
+  z-index: 1;
+  border-radius: 3px;
+  border: 1px dashed var(--border);
+  background: rgba(255, 255, 255, 0.015);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--text-faint);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.97);
+}
+.sanctum-card[data-open] .sanctum-well {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+.sanctum-well-1 {
+  top: 0;
+  right: 0;
+  transition:
+    opacity 0.45s ease 0.04s,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.04s;
+}
+.sanctum-well-2 {
+  left: 0;
+  bottom: 0;
+  transition:
+    opacity 0.45s ease 0.1s,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+.sanctum-well-3 {
+  right: 0;
+  bottom: 0;
+  transition:
+    opacity 0.45s ease 0.16s,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.16s;
+}
+
+/* ===================================================================== */
+/* Responsive layer — desktop untouched, tablet ≤999, mobile ≤599.        */
+/* Ported verbatim from the Dark Fantasy design's attribute selectors.    */
+/* ===================================================================== */
+[data-bottomnav] {
+  display: none;
+}
+@keyframes navspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 999px) {
+  [data-screen-label="Portfolio"] {
+    height: 100dvh !important;
+  }
+  [data-rail] {
+    display: none !important;
+  }
+  [data-bottomnav] {
+    display: flex !important;
+  }
+  [data-est] {
+    display: none !important;
+  }
+  [data-section] {
+    padding: clamp(20px, 3.4vw, 32px) !important;
+  }
+  [data-about-body] {
+    overflow-y: auto !important;
+  }
+  [data-about-row] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+    flex: 0 0 auto !important;
+  }
+  [data-about-portrait] {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: 190px !important;
+    min-height: 0 !important;
+  }
+  [data-facts-grid] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  [data-path-grid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-work-grid] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [data-give-grid] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [data-accolades-grid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-contact-grid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-contact-inner] {
+    flex: 0 0 auto !important;
+  }
+  [data-corner-body] {
+    overflow-y: auto !important;
+  }
+  [data-wins-intro] {
+    white-space: normal !important;
+  }
+}
+@media (max-width: 599px) {
+  [data-topbar] {
+    padding: 10px 15px !important;
+  }
+  [data-brandname] {
+    font-size: 15px !important;
+  }
+  [data-status] {
+    display: none !important;
+  }
+  [data-section] {
+    padding: 18px 15px !important;
+  }
+  [data-facts-grid] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  [data-work-grid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-give-grid] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-corner-body] {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    align-content: start !important;
+  }
+}
+
+/* ===== page-turner nav (prev · chapter · next) ===== */
+.pager-btn:hover {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 22px -5px var(--gold),
+    inset 0 0 14px -8px var(--gold);
+}
+.pager-btn:active {
+  transform: scale(0.88);
+}
+.pager-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  cursor: pointer;
+  background: var(--border-2);
+  box-shadow: none;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+.pager-dot[data-active] {
+  width: 18px;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+}
+
+/* ===== jump-to-chapter bottom sheet ===== */
+.nav-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgba(8, 5, 13, 0.74);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+.nav-sheet[data-open] {
+  display: flex;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.015);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+.nav-row[data-active] {
+  border-color: var(--accent);
+  background: rgba(168, 92, 255, 0.1);
+}
+.nav-row-n {
+  font-family: var(--f-display);
+  font-size: 15px;
+  width: 30px;
+  flex: 0 0 auto;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+.nav-row[data-active] .nav-row-n {
+  color: var(--gold);
+}
+.nav-row-leaf {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+  opacity: 0.5;
+  filter: none;
+}
+.nav-row[data-active] .nav-row-leaf {
+  opacity: 1;
+  filter: drop-shadow(0 0 7px var(--leaf));
+}
+.nav-row-label {
+  font-family: var(--f-display);
+  font-size: 17px;
+  line-height: 1.05;
+  color: var(--text-dim);
+}
+.nav-row[data-active] .nav-row-label {
+  color: var(--text);
+}
+.nav-row-desc {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+/* ===== Sanctum : mobile falls back to a stacked card + 3-up wells ===== */
+.sanctum-wells {
+  display: contents;
+}
+@media (max-width: 599px) {
+  .sanctum-card {
+    position: relative;
+    overflow: visible; /* let the card grow to fit the stacked wells instead of clipping */
+  }
+  .sanctum-card[data-open] {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .sanctum-id,
+  .sanctum-card[data-open] .sanctum-id {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .sanctum-wells {
+    display: none;
+  }
+  .sanctum-card[data-open] .sanctum-wells {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 0 18px 18px;
+  }
+  .sanctum-card[data-open] .sanctum-well {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    font-size: 10px;
+    transition: none;
+  }
+}
+
+/* ===================================================================== */
+/* Mobile / tablet (≤999): the whole page scrolls as one document        */
+/* instead of each section body being its own scroll box. The desktop    */
+/* fixed-console layout is untouched. Placed last so its !important wins. */
+/* ===================================================================== */
+@media (max-width: 999px) {
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  body {
+    overflow-x: hidden !important;
+  }
+  [data-screen-label="Portfolio"] {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+  /* keep the decor a fixed backdrop rather than stretching down the page */
+  [data-bg] {
+    position: fixed !important;
+  }
+  /* the active section flows into the document; inactive ones are removed */
+  [data-stage] {
+    overflow: visible !important;
+    padding-bottom: 88px; /* clear the fixed page-turner nav */
+  }
+  [data-section] {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    height: auto;
+    transition: none;
+  }
+  [data-section]:not([data-active]) {
+    display: none !important;
+  }
+  [data-body] {
+    overflow: visible !important;
+    min-height: 0 !important;
+  }
+  /* the page-turner stays pinned so chapters are always reachable */
+  [data-bottomnav] {
+    position: fixed !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
