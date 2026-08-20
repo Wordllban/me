@@ -6,14 +6,14 @@ import { education, accolades, course, wins } from "../../data/portfolio";
 <div class="section" data-section="wins">
   <SectionHeader
     title="Little wins, shared out loud."
-    rune="V · The Chronicle"
+    rune="05 · Background"
     marginBottom="6px"
   />
   <p
     data-wins-intro
     style="color:var(--text-dim);margin:0 0 18px;flex:0 0 auto;white-space:nowrap"
   >
-    Trials passed, tomes studied, milestones shared out loud. 🌱
+    Education, credentials and milestones.
   </p>
   <div
     data-body
@@ -28,7 +28,7 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       >
       <span
         style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)"
-        >The Academy · schooling &amp; scrolls</span
+        >Education · degrees &amp; courses</span
       >
       <span
         style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
@@ -87,7 +87,7 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       <div
         style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:9px"
       >
-        Tomes studied
+        Key coursework
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:7px">
         {
@@ -111,8 +111,8 @@ import { education, accolades, course, wins } from "../../data/portfolio";
             class="tt"
             style="position:relative;display:flex;align-items:center;gap:14px;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,rgba(216,180,106,.10),rgba(28,20,42,.4));padding:16px 18px"
           >
-            <span style="flex:0 0 auto;width:40px;height:40px;display:grid;place-items:center;border-radius:var(--radius);border:1px solid var(--border);background:rgba(216,180,106,.10);font-size:20px">
-              {a.emoji}
+            <span style="flex:0 0 auto;width:38px;height:38px;display:grid;place-items:center;border-radius:var(--radius);border:1px solid var(--border);background:rgba(216,180,106,.08)">
+              <span style="width:9px;height:9px;background:var(--gold);transform:rotate(45deg)" />
             </span>
             <div style="min-width:0;flex:1">
               <div style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px">
@@ -135,20 +135,22 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       class="tt"
       style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:18px 20px"
     >
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <span style="font-size:18px">☁️</span>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
         <span
-          style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2)"
+          style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto"
+        ></span>
+        <span
+          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)"
           >{course.kind}</span
         >
       </div>
       <h3
-        style="font-family:var(--f-display);font-size:18px;margin:0 0 8px;line-height:1.2"
+        style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25"
       >
         {course.title}
       </h3>
       <p
-        style="color:var(--text-dim);font-size:13.5px;margin:0;line-height:1.6;max-width:74ch"
+        style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65;max-width:74ch"
       >
         {course.note}
       </p>
@@ -163,7 +165,7 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       >
       <span
         style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)"
-        >Milestones · little wins</span
+        >Milestones</span
       >
       <span
         style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
@@ -174,16 +176,17 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       wins.map((w) => (
         <article
           class="tt"
-          style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:15px 20px"
+          style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;border-top:1px solid var(--border);padding:14px 4px 0"
         >
-          <div style="font-family:var(--f-mono);font-size:11.5px;color:var(--accent);text-align:center;padding-right:16px;border-right:1px solid var(--border);min-width:62px">
+          <div style="font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent);text-align:left;min-width:76px">
             {w.date}
           </div>
-          <div style="display:flex;align-items:center;gap:13px">
-            <span style="font-size:20px">{w.emoji}</span>
-            <div>
-              <div style="font-weight:600">{w.title}</div>
-              <div style="color:var(--text-dim);font-size:13.5px">{w.note}</div>
+          <div>
+            <div style="font-family:var(--f-display);font-size:17px;line-height:1.2">
+              {w.title}
+            </div>
+            <div style="color:var(--text-dim);font-size:14px;line-height:1.6">
+              {w.note}
             </div>
           </div>
         </article>

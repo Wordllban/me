@@ -17,7 +17,7 @@ const cur = sectionMeta.find((m) => m.key === activeKey) ?? sectionMeta[0];
   <button
     data-pager-prev
     class="pager-btn"
-    aria-label="Previous chapter"
+    aria-label="Previous section"
     style="position:relative;display:grid;place-items:center;width:48px;height:48px;flex:0 0 auto;border-radius:50%;border:1px solid var(--border-2);background:radial-gradient(circle at 50% 36%,rgba(255,255,255,.055),rgba(255,255,255,.008));cursor:pointer;color:var(--gold);transition:border-color .3s ease,box-shadow .3s ease,transform .18s ease;-webkit-tap-highlight-color:transparent"
   >
     <span
@@ -42,7 +42,7 @@ const cur = sectionMeta.find((m) => m.key === activeKey) ?? sectionMeta[0];
 
   <button
     data-pager-toggle
-    aria-label="Jump to chapter"
+    aria-label="Jump to section"
     style="position:relative;flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:4px 8px;border:none;background:transparent;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent"
   >
     <span
@@ -81,7 +81,7 @@ const cur = sectionMeta.find((m) => m.key === activeKey) ?? sectionMeta[0];
   <button
     data-pager-next
     class="pager-btn"
-    aria-label="Next chapter"
+    aria-label="Next section"
     style="position:relative;display:grid;place-items:center;width:48px;height:48px;flex:0 0 auto;border-radius:50%;border:1px solid var(--border-2);background:radial-gradient(circle at 50% 36%,rgba(255,255,255,.055),rgba(255,255,255,.008));cursor:pointer;color:var(--gold);transition:border-color .3s ease,box-shadow .3s ease,transform .18s ease;-webkit-tap-highlight-color:transparent"
   >
     <span
@@ -116,7 +116,7 @@ const cur = sectionMeta.find((m) => m.key === activeKey) ?? sectionMeta[0];
     >
       <span
         style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)"
-        >Choose a chapter</span
+        >Jump to section</span
       >
       <button
         data-nav-close

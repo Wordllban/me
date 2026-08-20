@@ -16,14 +16,12 @@ export interface Job {
 
 export interface Project {
   tag: string;
-  emoji: string;
   name: string;
   note: string;
   href?: string;
 }
 
 export interface Giving {
-  emoji: string;
   kind: string;
   title: string;
   note: string;
@@ -32,13 +30,11 @@ export interface Giving {
 
 export interface Win {
   date: string;
-  emoji: string;
   title: string;
   note: string;
 }
 
 export interface Accolade {
-  emoji: string;
   kind: string;
   title: string;
   year: string;
@@ -62,7 +58,7 @@ export interface Channel {
 
 export interface SanctumCard {
   key: string;
-  emoji: string;
+  mark: string;
   title: string;
   desc: string;
   meta: string;
@@ -71,18 +67,24 @@ export interface SanctumCard {
 }
 
 export const sectionMeta: SectionMeta[] = [
-  { key: "about", n: "I", label: "Origin", desc: "who I am" },
-  { key: "path", n: "II", label: "Path", desc: "the journey" },
-  { key: "work", n: "III", label: "Workshop", desc: "projects" },
-  { key: "give", n: "IV", label: "Order", desc: "talks · OSS" },
-  { key: "wins", n: "V", label: "Chronicle", desc: "milestones" },
-  { key: "corner", n: "VI", label: "Sanctum", desc: "my world" },
-  { key: "contact", n: "VII", label: "Hearth", desc: "say hi" },
+  { key: "about", n: "01", label: "About", desc: "who I am" },
+  { key: "path", n: "02", label: "Experience", desc: "the journey" },
+  { key: "work", n: "03", label: "Work", desc: "projects" },
+  { key: "give", n: "04", label: "Community", desc: "talks · OSS" },
+  { key: "wins", n: "05", label: "Background", desc: "milestones" },
+  { key: "corner", n: "06", label: "Personal", desc: "my world" },
+  { key: "contact", n: "07", label: "Contact", desc: "say hi" },
 ];
 
 export const timeline: Job[] = [
   {
-    years: "2025 — now",
+    years: "2026 — now",
+    role: "Senior Fullstack Engineer",
+    org: "Atorian",
+    note: "Cyber security startup that changes industry way of work.",
+  },
+  {
+    years: "2025 — 2026",
     role: "Technical Leader",
     org: "N-iX",
     note: "Lead 5 engineers across marketplace storefronts, drove an AI-native IDE shift that sped delivery ~20–30%, and ran the front-end migration of a component carrying 70% of the client's revenue.",
@@ -121,6 +123,12 @@ export const ventures: Job[] = [
     note: "A freelance, commission & community platform for every form of art — all the tools clients and artists need to work together, in one place. Closed beta ran this spring; open beta lands this summer.",
   },
   {
+    years: "2023 — 2024",
+    role: "Co-Founder",
+    org: "WardSculks",
+    note: "Co-founded a modded Minecraft server - grew it to 150+ players and 300+ people in the community, and built a customizable launcher with multi-server support and a built-in anti-cheat system.",
+  },
+  {
     years: "2021",
     role: "Two-time accelerator winner",
     org: "Creative Spark · SIA Ukraine",
@@ -131,7 +139,6 @@ export const ventures: Job[] = [
 export const projects: Project[] = [
   {
     tag: "desktop app",
-    emoji: "⛏️",
     name: "WardSculks Launcher",
     note: "Electron launcher for a Ukrainian modded Minecraft project — multi-server support, a built-in anti-cheat, and Discord Rich Presence.",
     href: "https://github.com/Wordllban/wardsculks-launcher",
@@ -140,33 +147,38 @@ export const projects: Project[] = [
 
 export const giving: Giving[] = [
   {
-    emoji: "🎤",
-    kind: "TALK",
+    kind: "Community",
+    title: "Ivy artists on Telegram",
+    note: "Grew a Telegram channel for artists to 1,100+ members, alongside Ivy's development - still growing.",
+  },
+  {
+    kind: "Community",
+    title: "Ivy on Discord",
+    note: "Built out Ivy's Discord community to 200+ members, alongside the Telegram channel - still growing.",
+  },
+  {
+    kind: "Talk",
     title: "Cursor 101 workshops",
     note: "Ran internal Cursor 101 workshops and talks at N-iX, getting teams fluent in AI-native development.",
   },
   {
-    emoji: "🧑‍🏫",
-    kind: "TEACHING",
+    kind: "Teaching",
     title: "Mentoring CS students",
     note: "Ran web-dev workshops for second-years and assessed their lab work across web, databases & algorithms.",
   },
   {
-    emoji: "🤝",
-    kind: "CHARITY",
+    kind: "Charity",
     title: "Code for community gardens",
     note: "Built free booking software for three local community gardens. Pro bono, joyfully.",
   },
   {
-    emoji: "📚",
-    kind: "OPEN SOURCE",
+    kind: "Open source",
     title: "TanStack Virtual docs",
     note: "Contributed documentation to TanStack Virtual so the next dev finds their footing faster.",
     href: "https://github.com/TanStack/virtual/commit/907ae66568658f6d2603a90adfc70acc50a8c71b",
   },
   {
-    emoji: "🐛",
-    kind: "OPEN SOURCE",
+    kind: "Open source",
     title: "Houdini Svelte fix",
     note: "Reported a load-fn error in the Houdini Svelte library and proposed the fix.",
     href: "https://github.com/Wordllban/houdini-svelte-load-fn-error",
@@ -176,13 +188,11 @@ export const giving: Giving[] = [
 export const wins: Win[] = [
   {
     date: "MAY 2026",
-    emoji: "🚀",
     title: "Ivy wrapped its closed beta",
     note: "First artists and clients side by side. I cried a little — open beta is next.",
   },
   {
     date: "MAR 2026",
-    emoji: "🎤",
     title: "Gave my first keynote",
     note: "Stage fright is real and survivable — you can do it too.",
   },
@@ -205,13 +215,11 @@ export const education = {
 
 export const accolades: Accolade[] = [
   {
-    emoji: "🏆",
     kind: "Startup accelerator · Winner",
     title: "Creative Spark Big Idea Challenge",
     year: "2021",
   },
   {
-    emoji: "🏆",
     kind: "Startup accelerator · Winner",
     title: "SIA Ukraine",
     year: "2021",
@@ -237,7 +245,7 @@ export const channels: Channel[] = [
     name: "Email",
     handle: "mininkov1337@gmail.com",
     href: "mailto:mininkov1337@gmail.com",
-    tag: "raven",
+    tag: "email",
     glyph: "@",
     markColor: "var(--gold)",
   },
@@ -271,7 +279,7 @@ export const channels: Channel[] = [
 export const sanctum: SanctumCard[] = [
   {
     key: "garden",
-    emoji: "🪴",
+    mark: "I",
     title: "The garden",
     desc: "Ivy, a stubborn juniper bonsai, and a shelf of succulents that have survived me this long.",
     meta: "// 11 plants & counting",
@@ -279,7 +287,7 @@ export const sanctum: SanctumCard[] = [
   },
   {
     key: "arcade",
-    emoji: "🎮",
+    mark: "II",
     title: "Games & anime",
     desc: "Cozy sims and deep RPGs taught me systems thinking first; anime taught me stories unafraid to be gentle — both fed by a love of Japan.",
     meta: "// wabi-sabi > perfection",
@@ -287,10 +295,10 @@ export const sanctum: SanctumCard[] = [
   },
   {
     key: "table",
-    emoji: "🎲",
+    mark: "III",
     title: "The table & D&D",
     desc: "The crunchier the better — deck builders, meaty wargames, and rolling dice with friends in worlds like Baldur's Gate.",
-    meta: "// 🎲 roll a d20",
+    meta: "// roll a d20",
     roll: true,
     ph: ["game shelf", "game night", "dice set"],
   },

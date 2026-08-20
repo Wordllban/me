@@ -24,18 +24,18 @@
   --leaf-2: #a9e6ba;
   --vine: #6b4f8f;
   --vein: rgba(220, 200, 150, 0.5);
-  --grid: rgba(140, 100, 200, 0.1);
-  --glow1: rgba(150, 60, 255, 0.3);
-  --glow2: rgba(216, 180, 106, 0.13);
+  --grid: rgba(140, 100, 200, 0.06);
+  --glow1: rgba(150, 60, 255, 0.22);
+  --glow2: rgba(216, 180, 106, 0.1);
   --radius: 3px;
   --shadow:
     0 0 0 1px rgba(176, 138, 86, 0.16), 0 30px 60px -28px rgba(60, 20, 90, 0.7);
-  --f-display: "Cinzel", serif;
+  --f-display: "Spectral", serif;
   --f-body: "EB Garamond", Georgia, serif;
   --f-mono: "JetBrains Mono", monospace;
   --grid-op: 1;
-  --glow-op: 1;
-  --scan-op: 0.4;
+  --glow-op: 0.8;
+  --scan-op: 0.16;
   --bracket-op: 1;
   --chip-bg: rgba(124, 77, 255, 0.14);
 }
@@ -171,7 +171,7 @@ a {
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 18px;
   cursor: pointer;
   background: transparent;
   border: none;
@@ -184,52 +184,65 @@ a {
 .nav-dagger-outline,
 .nav-dagger-fill {
   position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: -72px;
+  right: 0;
   z-index: 0;
   pointer-events: none;
   clip-path: polygon(
     0 0,
-    calc(100% - 16px) 0,
+    calc(100% - 17px) 0,
     100% 50%,
-    calc(100% - 16px) 100%,
+    calc(100% - 17px) 100%,
     0 100%
   );
   display: none;
 }
 .nav-dagger-outline {
-  top: -4px;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  background: var(--gold);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 30%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 30%);
+  background: linear-gradient(
+    90deg,
+    rgba(216, 180, 106, 0.24) 0%,
+    var(--chip-bg) 46%,
+    rgba(124, 77, 255, 0.02) 100%
+  );
 }
 .nav-dagger-fill {
-  top: -2.5px;
-  bottom: -2.5px;
-  left: 1.5px;
-  right: 1.5px;
-  background: linear-gradient(var(--chip-bg), var(--chip-bg)), var(--bg);
+  border-top: 1.5px solid var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+  box-sizing: border-box;
+}
+.nav-tip {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  right: 0;
+  width: 17px;
+  z-index: 0;
+  pointer-events: none;
+  display: none;
 }
 .nav-item[data-active] .nav-dagger-outline,
-.nav-item[data-active] .nav-dagger-fill {
+.nav-item[data-active] .nav-dagger-fill,
+.nav-item[data-active] .nav-tip {
   display: block;
 }
 .nav-leaf-wrap {
   position: relative;
   z-index: 1;
-  flex: 0 0 32px;
-  height: 32px;
+  flex: 0 0 clamp(28px, 4.4vh, 44px);
+  height: clamp(28px, 4.4vh, 44px);
   display: grid;
   place-items: center;
   transform: translateX(var(--leaf-dx, 0));
 }
 .nav-leaf {
-  width: 21px;
-  height: 21px;
+  width: clamp(22px, 3.4vh, 34px);
+  height: clamp(22px, 3.4vh, 34px);
   transform: rotate(var(--leaf-rot, 0deg));
-  opacity: 0.72;
-  filter: none;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0 6px var(--leaf));
   transition:
     width 0.3s ease,
     height 0.3s ease,
@@ -237,10 +250,11 @@ a {
     filter 0.3s ease;
 }
 .nav-item[data-active] .nav-leaf {
-  width: 30px;
-  height: 30px;
+  width: clamp(30px, 4.6vh, 46px);
+  height: clamp(30px, 4.6vh, 46px);
   opacity: 1;
-  filter: drop-shadow(0 0 8px var(--leaf));
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0 10px var(--leaf));
 }
 .nav-label {
   font-family: var(--f-display);
@@ -455,8 +469,8 @@ a {
   [data-bottomnav] {
     display: flex !important;
   }
-  [data-est] {
-    display: none !important;
+  [data-topbar] {
+    display: flex !important;
   }
   [data-section] {
     padding: clamp(20px, 3.4vw, 32px) !important;
@@ -509,7 +523,7 @@ a {
     padding: 10px 15px !important;
   }
   [data-brandname] {
-    font-size: 15px !important;
+    font-size: 10px !important;
   }
   [data-status] {
     display: none !important;

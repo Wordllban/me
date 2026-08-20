@@ -6,7 +6,7 @@ import { giving } from "../../data/portfolio";
 <div class="section" data-section="give">
   <SectionHeader
     title="Talks, open source & care."
-    rune="IV · The Order"
+    rune="04 · Community"
     marginBottom="20px"
   />
   <div
@@ -20,14 +20,17 @@ import { giving } from "../../data/portfolio";
           class="tt"
           style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:22px"
         >
-          <div style="font-size:24px;margin-bottom:12px">{g.emoji}</div>
-          <div style="font-family:var(--f-mono);font-size:10.5px;color:var(--accent-2);margin-bottom:6px;letter-spacing:.08em">
-            {g.kind}
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto" />
+            <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">
+              {g.kind}
+            </span>
+            <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)" />
           </div>
-          <h3 style="font-family:var(--f-display);font-size:18px;margin:0 0 8px;line-height:1.2">
+          <h3 style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25">
             {g.title}
           </h3>
-          <p style="color:var(--text-dim);font-size:13.5px;margin:0;line-height:1.6">
+          <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65">
             {g.note}
           </p>
           {g.href && (

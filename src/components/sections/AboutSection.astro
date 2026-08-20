@@ -6,7 +6,7 @@ import { facts } from "../../data/portfolio";
 <div class="section" data-section="about" data-active>
   <SectionHeader
     title="Engineer and founder. Gardener off the clock."
-    rune="I · The Origin"
+    rune="01 · About"
   />
   <div
     data-body
@@ -36,22 +36,6 @@ import { facts } from "../../data/portfolio";
           When I share what I make, it's not a flex — it's breadcrumbs, hoping
           to nudge someone else to start their own thing.
         </p>
-        <div
-          style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px"
-        >
-          {
-            [
-              "🌿 ivy & bonsai",
-              "🎮 gaming",
-              "🗾 japan & anime",
-              "💜 purple",
-            ].map((chip) => (
-              <span style="font-family:var(--f-mono);font-size:11.5px;padding:6px 12px;border-radius:999px;background:var(--chip-bg);border:1px solid var(--border);color:var(--text-dim)">
-                {chip}
-              </span>
-            ))
-          }
-        </div>
       </div>
       <div
         data-about-portrait
@@ -104,11 +88,11 @@ import { facts } from "../../data/portfolio";
       </div>
       <div
         data-facts-grid
-        style="display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(9px,1.2vw,14px)"
+        style="display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.8vw,26px)"
       >
         {
           facts.map((s) => (
-            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:13px 14px;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,rgba(124,77,255,.07),transparent)">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:2px 0 2px 15px;border-left:1px solid var(--border)">
               <span style="font-family:var(--f-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">
                 {s.label}
               </span>

@@ -112,7 +112,7 @@ function init(root: HTMLElement) {
     });
   pagerDots.forEach((d) => {
     d.addEventListener("click", (e) => {
-      e.stopPropagation(); // dots live inside the toggle button — don't also open the sheet
+      e.stopPropagation(); // dots live inside the toggle button - don't also open the sheet
       setSection(d.dataset.pagerDot as string);
     });
   });
@@ -173,13 +173,13 @@ function init(root: HTMLElement) {
   }
   function measureVine() {
     const nav = root.querySelector('nav[aria-label="Sections"]');
-    const path = root.querySelector("path[data-vine]");
-    if (!nav || !path) return;
+    const paths = [...root.querySelectorAll("path[data-vine]")];
+    if (!nav || !paths.length) return;
     const nb = nav.getBoundingClientRect();
     if (!nb.height) return;
     const leaves = [...nav.querySelectorAll("button")]
       .map((b) => {
-        const sv = b.querySelector("span svg");
+        const sv = b.querySelector("[data-leaf] svg");
         if (!sv) return null;
         const r = sv.getBoundingClientRect();
         return [
@@ -190,7 +190,8 @@ function init(root: HTMLElement) {
       .filter((x): x is [number, number] => x !== null);
     if (leaves.length < 2) return;
     const edge = -46;
-    path.setAttribute("d", splinePath([[edge, -34], ...leaves, [edge, 1034]]));
+    const d = splinePath([[edge, -34], ...leaves, [edge, 1034]]);
+    paths.forEach((p) => p.setAttribute("d", d));
   }
 
   // ---------- easter-egg FX ----------
@@ -317,7 +318,7 @@ function init(root: HTMLElement) {
     );
     setTimeout(() => e.remove(), dur + 120);
   }
-  setInterval(spawnEmber, 520);
+  setInterval(spawnEmber, 1500);
 
   // ---------- the Ivy medallion senses interactive elements (Witcher nod) ----------
   let lastSense = 0;
@@ -337,24 +338,25 @@ function init(root: HTMLElement) {
       trembleMedallion();
   });
 
-  // ---------- logo click ----------
+  // ---------- logo click (both the rail sigil and the mobile topbar sigil) ----------
   let logoN = 0;
-  const logo = root.querySelector<HTMLElement>("[data-logo-click]");
-  logo?.addEventListener("click", () => {
-    logoN += 1;
-    const leaf = root.querySelector<HTMLElement>("[data-logo-leaf]");
-    leaf?.animate(
-      [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
-      {
-        duration: 640,
-        easing: "cubic-bezier(.34,1.56,.64,1)",
+  root.querySelectorAll<HTMLElement>("[data-logo-click]").forEach((logo) => {
+    logo.addEventListener("click", () => {
+      logoN += 1;
+      const leaf = root.querySelector<HTMLElement>("[data-logo-leaf]");
+      leaf?.animate(
+        [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
+        {
+          duration: 640,
+          easing: "cubic-bezier(.34,1.56,.64,1)",
+        }
+      );
+      if (logoN >= 7) {
+        showToast("you really like ivy, huh?");
+        spawnLeafRain(14);
+        logoN = 0;
       }
-    );
-    if (logoN >= 7) {
-      showToast("🌱 you really like ivy, huh?");
-      spawnLeafRain(14);
-      logoN = 0;
-    }
+    });
   });
 
   // ---------- d20 roll ----------
@@ -363,22 +365,38 @@ function init(root: HTMLElement) {
     if (state._rolling) return;
     state._rolling = true;
     const iv = setInterval(() => {
-      el.textContent = "// 🎲 rolling… " + (1 + Math.floor(Math.random() * 20));
+      el.textContent = "// rolling… " + (1 + Math.floor(Math.random() * 20));
     }, 70);
     setTimeout(() => {
       clearInterval(iv);
       const r = 1 + Math.floor(Math.random() * 20);
       if (r === 20) {
-        el.textContent = "// 🐉 NAT 20 — critical hit!";
+        el.textContent = "// NAT 20 - critical hit";
         spawnLeafRain(28);
-        showToast("🎲 NATURAL 20 — critical hit!");
+        showToast("NATURAL 20 - critical hit");
       } else if (r === 1) {
-        el.textContent = "// 💀 natural 1… click to reroll";
+        el.textContent = "// natural 1… click to reroll";
       } else {
-        el.textContent = "// 🎲 rolled a " + r + " · click to reroll";
+        el.textContent = "// rolled a " + r + " · click to reroll";
       }
       state._rolling = false;
     }, 760);
+  }
+
+  // ---------- table sanctum card : "just one more turn" click gag ----------
+  // The prototype defines this joke but never wires a trigger for it, so it
+  // rides on the "table & D&D" card's existing open/close click.
+  let tableTurns = 0;
+  function tableTurn() {
+    tableTurns += 1;
+    const msgs = [
+      "one more turn…",
+      "okay, ONE more turn…",
+      "(you said that 2 turns ago)",
+      "it is somehow 3am now",
+    ];
+    showToast(msgs[Math.min(tableTurns, msgs.length - 1)]);
+    if (tableTurns === 3) showToast("just one more turn, promise");
   }
 
   // ---------- Sanctum : click a card → it blooms into a 2×2 well (FLIP) ----------
@@ -443,6 +461,7 @@ function init(root: HTMLElement) {
     const key = card.dataset.sanctumCard as string;
     const id = card.querySelector<HTMLElement>("[data-sanctum-toggle]");
     id?.addEventListener("click", () => toggleSanctum(key));
+    if (key === "table") id?.addEventListener("click", () => tableTurn());
     if (card.hasAttribute("data-roll")) {
       const meta = card.querySelector<HTMLElement>("[data-sanctum-meta]");
       meta?.addEventListener("click", (e) => {
@@ -472,7 +491,7 @@ function init(root: HTMLElement) {
     if (konami.length === seq.length && seq.every((k, i) => konami[i] === k)) {
       konami = [];
       spawnLeafRain(44);
-      showToast("🌿 KONAMI — secret garden unlocked");
+      showToast("KONAMI - secret garden unlocked");
     }
   });
 
