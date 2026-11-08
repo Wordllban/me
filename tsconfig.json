@@ -5,5 +5,11 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "verbatimModuleSyntax": true
-  }
+  },
+  "contentMappers": [
+    {
+      "package": "@astrojs/ts-content-mapper",
+      "extensions": [".astro"]
+    }
+  ]
 }
