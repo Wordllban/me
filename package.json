@@ -33,6 +33,6 @@
     "knip": "6.44.2",
     "lint-staged": "^17.6.0",
     "secretlint": "13.1.0",
-    "typescript": "7.1.0-beta"
+    "typescript": "7.1.0-dev.20261101.1"
   }
 }
