@@ -1,6 +1,6 @@
 ---
-import SectionHeader from "./SectionHeader.astro";
 import { giving } from "../../data/portfolio";
+import SectionHeader from "./SectionHeader.astro";
 ---
 
 <div class="section" data-section="give">
@@ -37,6 +37,7 @@ import { giving } from "../../data/portfolio";
             <span style="position:absolute;top:16px;right:16px;font-family:var(--f-mono);font-size:13px;color:var(--text-faint)">
               ↗
             </span>
+            <!-- biome-ignore lint/a11y/useAnchorContent: aria-label is an Astro expression Biome cannot read -->
             <a
               class="give-card-link"
               href={g.href}

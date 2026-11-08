@@ -1,5 +1,5 @@
 ---
-import { sectionMeta, vineAmps, buildVinePath } from "../data/portfolio";
+import { buildVinePath, sectionMeta, vineAmps } from "../data/portfolio";
 
 const vinePath = buildVinePath();
 const activeKey = "about";
@@ -10,28 +10,36 @@ const activeKey = "about";
   style="flex:0 0 clamp(290px,29vw,392px);min-height:0;display:flex;flex-direction:column;padding:clamp(16px,2.4vh,34px) 28px;border-right:1px solid var(--border);position:relative;overflow:hidden"
   class="tt"
 >
-  <div style="display:flex;align-items:center;gap:13px;margin-bottom:clamp(14px,2vh,22px);flex:0 0 auto">
+  <div
+    style="display:flex;align-items:center;gap:13px;margin-bottom:clamp(14px,2vh,22px);flex:0 0 auto"
+  >
     <span
       data-logo-click
       title="Ivy"
       style="position:relative;display:inline-grid;place-items:center;width:38px;height:38px;cursor:pointer;flex:0 0 auto"
     >
-      <span style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"></span>
+      <span
+        style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"
+      ></span>
       <img
         data-medallion
         data-logo-leaf
         src="/assets/ivy-logo.png"
         alt="Ivy"
         style="position:relative;width:34px;height:34px;border-radius:10px;box-shadow:0 0 0 1px var(--border),0 4px 14px -4px rgba(168,92,255,.7)"
-      />
+      >
     </span>
-    <span style="font-family:var(--f-display);font-size:19px;letter-spacing:.04em;font-weight:600">
+    <span
+      style="font-family:var(--f-display);font-size:19px;letter-spacing:.04em;font-weight:600"
+    >
       Kostiantyn&nbsp;Mininkov
     </span>
   </div>
 
   <div style="margin-bottom:clamp(10px,1.6vh,20px);flex:0 0 auto">
-    <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px">
+    <div
+      style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px"
+    >
       Software Engineer · Co-Founder
     </div>
     <p style="color:var(--text-dim);font-size:14.5px;line-height:1.55;margin:0">
@@ -47,6 +55,7 @@ const activeKey = "about";
     style="position:relative;z-index:1;flex:1 1 auto;min-height:0;overflow:visible;display:flex;flex-direction:column;justify-content:space-evenly;gap:0;padding-left:10px"
   >
     <svg
+      aria-hidden="true"
       viewBox="0 0 52 1000"
       preserveAspectRatio="none"
       style="position:absolute;left:0;top:0;bottom:0;height:100%;width:52px;overflow:visible;pointer-events:none;z-index:0"
@@ -97,6 +106,7 @@ const activeKey = "about";
 
     {sectionMeta.map((it, i) => (
       <button
+        type="button"
         class="nav-item"
         data-nav={it.key}
         data-active={it.key === activeKey ? "" : undefined}
@@ -106,6 +116,7 @@ const activeKey = "about";
         <span class="nav-dagger-fill" />
         <span class="nav-tip">
           <svg
+            aria-hidden="true"
             viewBox="0 0 17 100"
             preserveAspectRatio="none"
             style="display:block;width:100%;height:100%;overflow:visible"
@@ -120,7 +131,7 @@ const activeKey = "about";
           </svg>
         </span>
         <span class="nav-leaf-wrap" data-leaf>
-          <svg viewBox="0 0 100 100" class="nav-leaf">
+          <svg aria-hidden="true" viewBox="0 0 100 100" class="nav-leaf">
             <use href="#ivy-leaf" />
           </svg>
         </span>
@@ -139,7 +150,9 @@ const activeKey = "about";
     ))}
   </nav>
 
-  <div style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)">
+  <div
+    style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)"
+  >
     <a
       href="https://github.com/Wordllban"
       target="_blank"

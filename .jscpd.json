@@ -1,0 +1,8 @@
+{
+  "threshold": 2.5,
+  "path": ["src"],
+  "format": ["typescript", "javascript", "astro", "css"],
+  "reporters": ["console"],
+  "silent": true,
+  "gitignore": true
+}

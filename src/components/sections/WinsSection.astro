@@ -1,6 +1,6 @@
 ---
+import { accolades, course, education, wins } from "../../data/portfolio";
 import SectionHeader from "./SectionHeader.astro";
-import { education, accolades, course, wins } from "../../data/portfolio";
 ---
 
 <div class="section" data-section="wins">
@@ -22,15 +22,20 @@ import { education, accolades, course, wins } from "../../data/portfolio";
     <!-- The Academy -->
     <div style="display:flex;align-items:center;gap:12px">
       <svg
+        aria-hidden="true"
         viewBox="0 0 100 100"
         style="width:16px;height:16px;flex:0 0 auto;filter:drop-shadow(0 0 6px var(--leaf))"
       >
         <use href="#ivy-leaf"></use>
       </svg>
-      <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)">
+      <span
+        style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)"
+      >
         Education · degrees &amp; courses
       </span>
-      <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"></span>
+      <span
+        style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
+      ></span>
     </div>
 
     <!-- university tome -->
@@ -38,21 +43,32 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:clamp(18px,2.2vw,26px);box-shadow:var(--shadow)"
       class="tt"
     >
-      <span style="position:absolute;top:10px;left:10px;width:13px;height:13px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <span style="position:absolute;bottom:10px;right:10px;width:13px;height:13px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+      <span
+        style="position:absolute;top:10px;left:10px;width:13px;height:13px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <span
+        style="position:absolute;bottom:10px;right:10px;width:13px;height:13px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <div
+        style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap"
+      >
         <div style="display:flex;align-items:flex-start;gap:13px;min-width:0">
           <svg
+            aria-hidden="true"
             viewBox="0 0 100 100"
             style="width:26px;height:26px;flex:0 0 auto;margin-top:2px;filter:drop-shadow(0 0 7px var(--leaf))"
           >
             <use href="#ivy-leaf"></use>
           </svg>
           <div style="min-width:0">
-            <div style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:5px">
+            <div
+              style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:5px"
+            >
               {education.degree}
             </div>
-            <h3 style="font-family:var(--f-display);font-size:clamp(18px,2vw,22px);margin:0 0 4px;line-height:1.15">
+            <h3
+              style="font-family:var(--f-display);font-size:clamp(18px,2vw,22px);margin:0 0 4px;line-height:1.15"
+            >
               {education.field}
             </h3>
             <div style="color:var(--text-dim);font-size:14px">
@@ -60,16 +76,24 @@ import { education, accolades, course, wins } from "../../data/portfolio";
             </div>
           </div>
         </div>
-        <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border-2);background:linear-gradient(180deg,rgba(124,77,255,.14),transparent)">
-          <span style="font-family:var(--f-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)">
+        <div
+          style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border-2);background:linear-gradient(180deg,rgba(124,77,255,.14),transparent)"
+        >
+          <span
+            style="font-family:var(--f-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)"
+          >
             Grade
           </span>
-          <span style="font-family:var(--f-display);font-weight:600;font-size:20px;color:var(--text);line-height:1">
+          <span
+            style="font-family:var(--f-display);font-weight:600;font-size:20px;color:var(--text);line-height:1"
+          >
             {education.grade}
           </span>
         </div>
       </div>
-      <div style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:9px">
+      <div
+        style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:9px"
+      >
         Key coursework
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:7px">
@@ -115,15 +139,23 @@ import { education, accolades, course, wins } from "../../data/portfolio";
       style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:18px 20px"
     >
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
-        <span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto"></span>
-        <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">
+        <span
+          style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto"
+        ></span>
+        <span
+          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)"
+        >
           {course.kind}
         </span>
       </div>
-      <h3 style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25">
+      <h3
+        style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25"
+      >
         {course.title}
       </h3>
-      <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65;max-width:74ch">
+      <p
+        style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65;max-width:74ch"
+      >
         {course.note}
       </p>
     </article>
@@ -131,15 +163,20 @@ import { education, accolades, course, wins } from "../../data/portfolio";
     <!-- Milestones -->
     <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
       <svg
+        aria-hidden="true"
         viewBox="0 0 100 100"
         style="width:16px;height:16px;flex:0 0 auto;filter:drop-shadow(0 0 6px var(--leaf))"
       >
         <use href="#ivy-leaf"></use>
       </svg>
-      <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)">
+      <span
+        style="font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)"
+      >
         Milestones
       </span>
-      <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"></span>
+      <span
+        style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
+      ></span>
     </div>
 
     {wins.map((w) => (

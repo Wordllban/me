@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  // agent tooling, not product code
+  "ignore": [".agents/**", ".claude/**"],
+  "ignoreDependencies": [
+    // loaded by name from .secretlintrc.json
+    "@secretlint/secretlint-rule-preset-recommend",
+    // run through xargs in the lint:secrets script
+    "secretlint"
+  ]
+}

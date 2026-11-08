@@ -305,7 +305,7 @@ export const sanctum: SanctumCard[] = [
 ];
 
 // Vine geometry — irregular bumps (one per leaf row).
-export const vineCx = 26;
+const vineCx = 26;
 export const vineAmps = [-14, 10, -19, 11, -16, 9, -18];
 
 export function buildVinePath(): string {
@@ -313,9 +313,9 @@ export function buildVinePath(): string {
   const r = (v: number) => Math.round(v * 10) / 10;
   const edge = -46;
   const pts: [number, number][] = [[edge, -34]];
-  vineAmps.forEach((a, i) => pts.push([cx + a, (i + 1) * 125]));
+  for (const [i, a] of vineAmps.entries()) pts.push([cx + a, (i + 1) * 125]);
   pts.push([edge, 1034]);
-  let d = "M" + r(pts[0][0]) + "," + r(pts[0][1]);
+  let d = `M${r(pts[0][0])},${r(pts[0][1])}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const p0 = pts[i - 1] || pts[i];
     const p1 = pts[i];

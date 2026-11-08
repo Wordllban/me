@@ -9,10 +9,15 @@
     "preview": "astro preview",
     "check": "astro check",
     "typecheck": "astro check",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "lint": "biome check --formatter-enabled=false --error-on-warnings",
+    "lint:fix": "biome check --formatter-enabled=false --write",
+    "format": "biome format --write",
+    "format:check": "biome format",
+    "lint:duplication": "jscpd",
+    "lint:dead-code": "knip --no-progress --no-config-hints",
+    "lint:secrets": "git ls-files -z | xargs -0 secretlint --no-glob",
+    "lint:audit": "pnpm audit --audit-level high",
+    "cleanup": "pnpm format && pnpm lint:fix && pnpm typecheck",
     "prepare": "husky"
   },
   "dependencies": {
@@ -22,17 +27,13 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.14.0",
-    "eslint-plugin-astro": "^3.2.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "globals": "^17.14.0",
+    "@biomejs/biome": "2.6.6",
+    "@secretlint/secretlint-rule-preset-recommend": "13.1.0",
     "husky": "^9.1.7",
+    "jscpd": "5.4.2",
+    "knip": "6.44.2",
     "lint-staged": "^17.6.0",
-    "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.2",
-    "prettier-plugin-tailwindcss": "^0.8.1",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.1"
+    "secretlint": "13.1.0",
+    "typescript": "^6.0.3"
   }
 }

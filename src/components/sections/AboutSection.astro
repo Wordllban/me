@@ -1,6 +1,6 @@
 ---
-import SectionHeader from "./SectionHeader.astro";
 import { facts } from "../../data/portfolio";
+import SectionHeader from "./SectionHeader.astro";
 ---
 
 <div class="section" data-section="about" data-active>
@@ -42,7 +42,9 @@ import { facts } from "../../data/portfolio";
         class="tt"
         style="flex:0 0 clamp(250px,30vw,360px);position:relative;height:100%;min-height:150px;border-radius:var(--radius);border:1px dashed var(--border);background:repeating-linear-gradient(45deg,var(--panel-2) 0 11px,transparent 11px 22px);display:grid;place-items:center"
       >
-        <span style="font-family:var(--f-mono);font-size:11.5px;color:var(--text-faint)">
+        <span
+          style="font-family:var(--f-mono);font-size:11.5px;color:var(--text-faint)"
+        >
           [ portrait ]
         </span>
       </div>
@@ -52,19 +54,32 @@ import { facts } from "../../data/portfolio";
       style="flex:0 0 auto;position:relative;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,rgba(124,77,255,.08),rgba(28,20,42,.4));padding:clamp(15px,1.7vw,20px) clamp(16px,1.8vw,22px);box-shadow:var(--shadow)"
       class="tt"
     >
-      <span style="position:absolute;top:9px;left:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <span style="position:absolute;top:9px;right:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <span style="position:absolute;bottom:9px;left:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <span style="position:absolute;bottom:9px;right:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"></span>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px">
+      <span
+        style="position:absolute;top:9px;left:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <span
+        style="position:absolute;top:9px;right:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <span
+        style="position:absolute;bottom:9px;left:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <span
+        style="position:absolute;bottom:9px;right:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"
+      ></span>
+      <div
+        style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px"
+      >
         <div style="display:flex;align-items:center;gap:9px">
           <svg
+            aria-hidden="true"
             viewBox="0 0 100 100"
             style="width:19px;height:19px;filter:drop-shadow(0 0 6px var(--leaf))"
           >
             <use href="#ivy-leaf"></use>
           </svg>
-          <span style="font-family:var(--f-display);font-size:15px;letter-spacing:.05em">
+          <span
+            style="font-family:var(--f-display);font-size:15px;letter-spacing:.05em"
+          >
             At a Glance
           </span>
         </div>

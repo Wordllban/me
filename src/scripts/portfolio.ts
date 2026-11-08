@@ -12,6 +12,7 @@ function detectLayout(): "mobile" | "tablet" | "desktop" {
   return w < 600 ? "mobile" : w < 1000 ? "tablet" : "desktop";
 }
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: one closure owns all page state; split tracked as debt
 function init(root: HTMLElement) {
   let section = "about";
   let openCard = "garden";
@@ -145,7 +146,7 @@ function init(root: HTMLElement) {
   // ---------- vine routed through the real measured leaf positions ----------
   function splinePath(pts: [number, number][]) {
     const r = (v: number) => Math.round(v * 10) / 10;
-    let d = "M" + r(pts[0][0]) + "," + r(pts[0][1]);
+    let d = `M${r(pts[0][0])},${r(pts[0][1])}`;
     for (let i = 0; i < pts.length - 1; i++) {
       const p0 = pts[i - 1] || pts[i];
       const p1 = pts[i];
@@ -191,7 +192,7 @@ function init(root: HTMLElement) {
     if (leaves.length < 2) return;
     const edge = -46;
     const d = splinePath([[edge, -34], ...leaves, [edge, 1034]]);
-    paths.forEach((p) => p.setAttribute("d", d));
+    for (const p of paths) p.setAttribute("d", d);
   }
 
   // ---------- easter-egg FX ----------
@@ -209,11 +210,11 @@ function init(root: HTMLElement) {
     const ns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 100 100");
-    svg.style.width = size + "px";
-    svg.style.height = size + "px";
+    svg.style.width = `${size}px`;
+    svg.style.height = `${size}px`;
     svg.style.setProperty("--leaf", color);
     svg.style.setProperty("--vein", "rgba(255,255,255,.45)");
-    svg.style.filter = "drop-shadow(0 4px 10px " + color + "66)";
+    svg.style.filter = `drop-shadow(0 4px 10px ${color}66)`;
     const use = document.createElementNS(ns, "use");
     use.setAttribute("href", "#ivy-leaf");
     svg.appendChild(use);
@@ -225,8 +226,7 @@ function init(root: HTMLElement) {
     for (let i = 0; i < n; i++) {
       const wrap = document.createElement("div");
       const size = 14 + Math.random() * 24;
-      wrap.style.cssText =
-        "position:absolute;top:-60px;left:" + Math.random() * 100 + "vw";
+      wrap.style.cssText = `position:absolute;top:-60px;left:${Math.random() * 100}vw`;
       wrap.appendChild(leafSVG(size, cols[i % cols.length]));
       const drift = (Math.random() * 2 - 1) * 150;
       const rot = (Math.random() * 2 - 1) * 780;
@@ -312,7 +312,7 @@ function init(root: HTMLElement) {
         { transform: "translate(0,0)", opacity: 0 },
         { opacity: 0.9, offset: 0.12 },
         { opacity: 0.65, offset: 0.7 },
-        { transform: "translate(" + drift + "px,-86vh)", opacity: 0 },
+        { transform: `translate(${drift}px,-86vh)`, opacity: 0 },
       ],
       { duration: dur, easing: "ease-out", fill: "forwards" }
     );
@@ -334,8 +334,7 @@ function init(root: HTMLElement) {
   }
   root.addEventListener("mouseover", (e) => {
     const t = e.target as HTMLElement;
-    if (t.closest && t.closest("button,a,article,[data-spark]"))
-      trembleMedallion();
+    if (t.closest?.("button,a,article,[data-spark]")) trembleMedallion();
   });
 
   // ---------- logo click (both the rail sigil and the mobile topbar sigil) ----------
@@ -365,7 +364,7 @@ function init(root: HTMLElement) {
     if (state._rolling) return;
     state._rolling = true;
     const iv = setInterval(() => {
-      el.textContent = "// rolling… " + (1 + Math.floor(Math.random() * 20));
+      el.textContent = `// rolling… ${1 + Math.floor(Math.random() * 20)}`;
     }, 70);
     setTimeout(() => {
       clearInterval(iv);
@@ -377,7 +376,7 @@ function init(root: HTMLElement) {
       } else if (r === 1) {
         el.textContent = "// natural 1… click to reroll";
       } else {
-        el.textContent = "// rolled a " + r + " · click to reroll";
+        el.textContent = `// rolled a ${r} · click to reroll`;
       }
       state._rolling = false;
     }, 760);
@@ -439,8 +438,8 @@ function init(root: HTMLElement) {
       c.style.transition = "none";
       c.style.transformOrigin = "top left";
       c.style.transform = active
-        ? "translate(" + dx + "px," + dy + "px)"
-        : "translate(" + dx + "px," + dy + "px) scale(" + sx + "," + sy + ")";
+        ? `translate(${dx}px,${dy}px)`
+        : `translate(${dx}px,${dy}px) scale(${sx},${sy})`;
     });
     void root.offsetWidth;
     cards.forEach((c) => {
@@ -553,8 +552,7 @@ function init(root: HTMLElement) {
   applySection(section);
   measureVine();
   requestAnimationFrame(measureVine);
-  if (document.fonts && document.fonts.ready)
-    document.fonts.ready.then(measureVine);
+  document.fonts?.ready?.then(measureVine);
   if (window.ResizeObserver) {
     const nav = root.querySelector('nav[aria-label="Sections"]');
     if (nav) new ResizeObserver(measureVine).observe(nav);

@@ -1,6 +1,6 @@
 ---
-import SectionHeader from "./SectionHeader.astro";
 import { timeline, ventures } from "../../data/portfolio";
+import SectionHeader from "./SectionHeader.astro";
 ---
 
 <div class="section" data-section="path">
@@ -16,23 +16,33 @@ import { timeline, ventures } from "../../data/portfolio";
   >
     <!-- Corporate -->
     <div style="display:flex;flex-direction:column;min-height:0">
-      <div style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto">
+      <div
+        style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto"
+      >
         <svg
+          aria-hidden="true"
           viewBox="0 0 100 100"
           style="width:16px;height:16px;flex:0 0 auto;filter:drop-shadow(0 0 6px var(--leaf))"
         >
           <use href="#ivy-leaf"></use>
         </svg>
-        <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)">
+        <span
+          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)"
+        >
           Corporate · the craft
         </span>
-        <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"></span>
+        <span
+          style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
+        ></span>
       </div>
       <div style="flex:1;min-height:0;overflow-y:auto;padding:0 6px 0 40px">
-        <div style="border-left:2px solid var(--border);padding-left:26px;margin-left:6px">
+        <div
+          style="border-left:2px solid var(--border);padding-left:26px;margin-left:6px"
+        >
           {timeline.map((job) => (
             <div style="position:relative;padding:0 0 24px">
               <svg
+                aria-hidden="true"
                 viewBox="0 0 100 100"
                 style="position:absolute;left:-36px;top:1px;width:18px;height:18px"
               >
@@ -56,23 +66,33 @@ import { timeline, ventures } from "../../data/portfolio";
 
     <!-- Entrepreneurship -->
     <div style="display:flex;flex-direction:column;min-height:0">
-      <div style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto">
+      <div
+        style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto"
+      >
         <svg
+          aria-hidden="true"
           viewBox="0 0 100 100"
           style="width:16px;height:16px;flex:0 0 auto;--leaf:var(--accent);filter:drop-shadow(0 0 7px var(--accent))"
         >
           <use href="#ivy-leaf"></use>
         </svg>
-        <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)">
+        <span
+          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)"
+        >
           Venture · the founder
         </span>
-        <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border-2),transparent)"></span>
+        <span
+          style="flex:1;height:1px;background:linear-gradient(90deg,var(--border-2),transparent)"
+        ></span>
       </div>
       <div style="flex:1;min-height:0;overflow-y:auto;padding:0 6px 0 40px">
-        <div style="border-left:2px solid var(--border-2);padding-left:26px;margin-left:6px">
+        <div
+          style="border-left:2px solid var(--border-2);padding-left:26px;margin-left:6px"
+        >
           {ventures.map((job) => (
             <div style="position:relative;padding:0 0 24px">
               <svg
+                aria-hidden="true"
                 viewBox="0 0 100 100"
                 style="position:absolute;left:-36px;top:1px;width:18px;height:18px;--leaf:var(--accent);filter:drop-shadow(0 0 6px var(--accent))"
               >
