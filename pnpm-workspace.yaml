@@ -6,3 +6,8 @@ allowBuilds:
 
 # Skip pnpm's auto "is the lockfile in sync" check before `pnpm run` scripts.
 verifyDepsBeforeRun: false
+
+# @astrojs/astro2tsx leaves @emnapi/runtime as an unmet peer; pnpm otherwise
+# auto-installs the 2.x prerelease, which is ABI-incompatible with @emnapi/core 1.x.
+overrides:
+  "@emnapi/runtime": "^1.11.3"

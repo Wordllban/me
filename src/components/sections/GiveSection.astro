@@ -14,42 +14,40 @@ import { giving } from "../../data/portfolio";
     data-give-grid
     style="flex:1;min-height:0;overflow-y:auto;padding-right:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-content:start"
   >
-    {
-      giving.map((g) => (
-        <article
-          class="tt"
-          style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:22px"
-        >
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-            <span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto" />
-            <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">
-              {g.kind}
+    {giving.map((g) => (
+      <article
+        class="tt"
+        style="position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:22px"
+      >
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto" />
+          <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">
+            {g.kind}
+          </span>
+          <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)" />
+        </div>
+        <h3 style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25">
+          {g.title}
+        </h3>
+        <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65">
+          {g.note}
+        </p>
+        {g.href && (
+          <>
+            <span style="position:absolute;top:16px;right:16px;font-family:var(--f-mono);font-size:13px;color:var(--text-faint)">
+              ↗
             </span>
-            <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)" />
-          </div>
-          <h3 style="font-family:var(--f-display);font-size:19px;margin:0 0 9px;line-height:1.25">
-            {g.title}
-          </h3>
-          <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65">
-            {g.note}
-          </p>
-          {g.href && (
-            <>
-              <span style="position:absolute;top:16px;right:16px;font-family:var(--f-mono);font-size:13px;color:var(--text-faint)">
-                ↗
-              </span>
-              <a
-                class="give-card-link"
-                href={g.href}
-                target="_blank"
-                rel="noopener"
-                aria-label={g.title}
-                style="position:absolute;inset:0;border-radius:var(--radius)"
-              />
-            </>
-          )}
-        </article>
-      ))
-    }
+            <a
+              class="give-card-link"
+              href={g.href}
+              target="_blank"
+              rel="noopener"
+              aria-label={g.title}
+              style="position:absolute;inset:0;border-radius:var(--radius)"
+            />
+          </>
+        )}
+      </article>
+    ))}
   </div>
 </div>

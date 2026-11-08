@@ -10,17 +10,13 @@ const activeKey = "about";
   style="flex:0 0 clamp(290px,29vw,392px);min-height:0;display:flex;flex-direction:column;padding:clamp(16px,2.4vh,34px) 28px;border-right:1px solid var(--border);position:relative;overflow:hidden"
   class="tt"
 >
-  <div
-    style="display:flex;align-items:center;gap:13px;margin-bottom:clamp(14px,2vh,22px);flex:0 0 auto"
-  >
+  <div style="display:flex;align-items:center;gap:13px;margin-bottom:clamp(14px,2vh,22px);flex:0 0 auto">
     <span
       data-logo-click
       title="Ivy"
       style="position:relative;display:inline-grid;place-items:center;width:38px;height:38px;cursor:pointer;flex:0 0 auto"
     >
-      <span
-        style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"
-      ></span>
+      <span style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"></span>
       <img
         data-medallion
         data-logo-leaf
@@ -29,16 +25,13 @@ const activeKey = "about";
         style="position:relative;width:34px;height:34px;border-radius:10px;box-shadow:0 0 0 1px var(--border),0 4px 14px -4px rgba(168,92,255,.7)"
       />
     </span>
-    <span
-      style="font-family:var(--f-display);font-size:19px;letter-spacing:.04em;font-weight:600"
-      >Kostiantyn&nbsp;Mininkov</span
-    >
+    <span style="font-family:var(--f-display);font-size:19px;letter-spacing:.04em;font-weight:600">
+      Kostiantyn&nbsp;Mininkov
+    </span>
   </div>
 
   <div style="margin-bottom:clamp(10px,1.6vh,20px);flex:0 0 auto">
-    <div
-      style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px"
-    >
+    <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px">
       Software Engineer · Co-Founder
     </div>
     <p style="color:var(--text-dim);font-size:14.5px;line-height:1.55;margin:0">
@@ -66,7 +59,8 @@ const activeKey = "about";
         stroke-width="9"
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"
-        opacity=".85"></path>
+        opacity=".85"
+      ></path>
       <path
         data-vine
         d={vinePath}
@@ -75,7 +69,8 @@ const activeKey = "about";
         stroke-width="5.5"
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"
-        opacity=".95"></path>
+        opacity=".95"
+      ></path>
       <path
         data-vine
         d={vinePath}
@@ -84,7 +79,8 @@ const activeKey = "about";
         stroke-width="1.6"
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"
-        style="transform:translate(-1.6px,-1px)"></path>
+        style="transform:translate(-1.6px,-1px)"
+      ></path>
       <path
         data-vine
         d={vinePath}
@@ -95,73 +91,74 @@ const activeKey = "about";
         stroke-dasharray="3 13"
         vector-effect="non-scaling-stroke"
         opacity=".45"
-        style="transform:translate(1.8px,1px)"></path>
+        style="transform:translate(1.8px,1px)"
+      ></path>
     </svg>
 
-    {
-      sectionMeta.map((it, i) => (
-        <button
-          class="nav-item"
-          data-nav={it.key}
-          data-active={it.key === activeKey ? "" : undefined}
-          style={`--leaf-dx:${vineAmps[i]}px;--leaf-rot:${i % 2 === 0 ? -14 : 14}deg`}
-        >
-          <span class="nav-dagger-outline" />
-          <span class="nav-dagger-fill" />
-          <span class="nav-tip">
-            <svg
-              viewBox="0 0 17 100"
-              preserveAspectRatio="none"
-              style="display:block;width:100%;height:100%;overflow:visible"
-            >
-              <path
-                d="M0 0.8 L16.2 50 L0 99.2"
-                fill="none"
-                stroke="var(--gold)"
-                stroke-width="1.5"
-                vector-effect="non-scaling-stroke"
-              />
-            </svg>
-          </span>
-          <span class="nav-leaf-wrap" data-leaf>
-            <svg viewBox="0 0 100 100" class="nav-leaf">
-              <use href="#ivy-leaf" />
-            </svg>
-          </span>
-          <span style="position:relative;z-index:1;display:flex;flex-direction:column;line-height:1.08;min-width:0">
-            <span class="nav-label">
-              <span style="font-family:var(--f-mono);font-size:11px;opacity:.6;margin-right:7px">
-                {it.n}
-              </span>
-              {it.label}
+    {sectionMeta.map((it, i) => (
+      <button
+        class="nav-item"
+        data-nav={it.key}
+        data-active={it.key === activeKey ? "" : undefined}
+        style={`--leaf-dx:${vineAmps[i]}px;--leaf-rot:${i % 2 === 0 ? -14 : 14}deg`}
+      >
+        <span class="nav-dagger-outline" />
+        <span class="nav-dagger-fill" />
+        <span class="nav-tip">
+          <svg
+            viewBox="0 0 17 100"
+            preserveAspectRatio="none"
+            style="display:block;width:100%;height:100%;overflow:visible"
+          >
+            <path
+              d="M0 0.8 L16.2 50 L0 99.2"
+              fill="none"
+              stroke="var(--gold)"
+              stroke-width="1.5"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </span>
+        <span class="nav-leaf-wrap" data-leaf>
+          <svg viewBox="0 0 100 100" class="nav-leaf">
+            <use href="#ivy-leaf" />
+          </svg>
+        </span>
+        <span style="position:relative;z-index:1;display:flex;flex-direction:column;line-height:1.08;min-width:0">
+          <span class="nav-label">
+            <span style="font-family:var(--f-mono);font-size:11px;opacity:.6;margin-right:7px">
+              {it.n}
             </span>
-            <span style="font-family:var(--f-mono);font-size:11px;color:var(--text-faint);letter-spacing:.02em;white-space:nowrap">
-              {it.desc}
-            </span>
+            {it.label}
           </span>
-        </button>
-      ))
-    }
+          <span style="font-family:var(--f-mono);font-size:11px;color:var(--text-faint);letter-spacing:.02em;white-space:nowrap">
+            {it.desc}
+          </span>
+        </span>
+      </button>
+    ))}
   </nav>
 
-  <div
-    style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)"
-  >
+  <div style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)">
     <a
       href="https://github.com/Wordllban"
       target="_blank"
       rel="noopener"
-      style="text-decoration:none">github</a
+      style="text-decoration:none"
     >
+      github
+    </a>
     <a
       href="https://www.linkedin.com/in/kostiantyn-mininkov/"
       target="_blank"
       rel="noopener"
-      style="text-decoration:none">linkedin</a
+      style="text-decoration:none"
     >
-    <a href="mailto:mininkov1337@gmail.com" style="text-decoration:none"
-      >email</a
-    >
+      linkedin
+    </a>
+    <a href="mailto:mininkov1337@gmail.com" style="text-decoration:none">
+      email
+    </a>
     <span style="margin-left:auto;opacity:.7">↑↓ / click</span>
   </div>
 </aside>
