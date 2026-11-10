@@ -1,32 +1,94 @@
 ---
-import { buildVinePath, sectionMeta, vineAmps } from "../data/portfolio";
+import { ivyLeaves, ivyScale, ivySrc } from "../data/ivy";
+import { sectionMeta } from "../data/portfolio";
 
-const vinePath = buildVinePath();
 const activeKey = "about";
+
+// One real ivy leaf per chapter: its tilt, relative size and where its petiole
+// meets the row. The vine script grows the stem to these junctions.
+const rowLeaves = [
+  { variant: "c1", rotate: 6, size: 1, dx: -3, dy: -6 },
+  { variant: "c2", rotate: -22, size: 1.03, dx: 6, dy: -5 },
+  { variant: "c3", rotate: 28, size: 0.94, dx: -5, dy: -4 },
+  { variant: "c4", rotate: -18, size: 1.06, dx: 3, dy: -8 },
+  { variant: "c5", rotate: 22, size: 0.97, dx: 5, dy: -5 },
+  { variant: "c6", rotate: -26, size: 1, dx: -3, dy: -7 },
+  { variant: "c7", rotate: 14, size: 1.09, dx: 5, dy: -4 },
+] as const;
+
+const rows = sectionMeta.map((it, i) => {
+  const spec = rowLeaves[i % rowLeaves.length];
+  const leaf = ivyLeaves[spec.variant];
+  const perLength = ivyScale(spec.variant, 1);
+  return {
+    ...it,
+    active: it.key === activeKey,
+    src: ivySrc(spec.variant),
+    leaf,
+    perLength: leaf.w * perLength,
+    petiole: leaf.pa + spec.rotate,
+    style: [
+      `--w:${(leaf.w * perLength).toFixed(4)}`,
+      `--jx:${(leaf.jx * perLength).toFixed(4)}`,
+      `--jy:${(leaf.jy * perLength).toFixed(4)}`,
+      `--rot:${spec.rotate}deg`,
+      `--size:${spec.size}`,
+      `--dx:${spec.dx}px`,
+      `--dy:${spec.dy}px`,
+    ].join(";"),
+  };
+});
 ---
 
-<aside
-  data-rail
-  style="flex:0 0 clamp(290px,29vw,392px);min-height:0;display:flex;flex-direction:column;padding:clamp(16px,2.4vh,34px) 28px;border-right:1px solid var(--border);position:relative;overflow:hidden"
-  class="tt"
->
-  <div
-    style="display:flex;align-items:center;gap:13px;margin-bottom:clamp(14px,2vh,22px);flex:0 0 auto"
-  >
-    <span
-      data-logo-click
-      title="Ivy"
-      style="position:relative;display:inline-grid;place-items:center;width:38px;height:38px;cursor:pointer;flex:0 0 auto"
-    >
-      <span
-        style="position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(168,92,255,.5),transparent 68%);animation:haze 3.4s ease-in-out infinite"
-      ></span>
+<aside data-rail class="rail tt">
+  <span class="rail-edge" aria-hidden="true"></span>
+  <svg data-vine class="rail-vine" aria-hidden="true">
+    <defs>
+      <linearGradient
+        id="ivy-bark"
+        gradientUnits="userSpaceOnUse"
+        x1="0"
+        x2="0"
+      >
+        <stop offset="0" stop-color="#4a3c2c"></stop>
+        <stop offset="0.4" stop-color="#4b4a2d"></stop>
+        <stop offset="0.75" stop-color="#4f6a33"></stop>
+        <stop offset="1" stop-color="#78a64e"></stop>
+      </linearGradient>
+      <linearGradient id="ivy-lit" gradientUnits="userSpaceOnUse" x1="0" x2="0">
+        <stop offset="0" stop-color="#6e5d45"></stop>
+        <stop offset="0.4" stop-color="#6c6a40"></stop>
+        <stop offset="0.75" stop-color="#6e9147"></stop>
+        <stop offset="1" stop-color="#9fcb6c"></stop>
+      </linearGradient>
+      <linearGradient id="ivy-hi" gradientUnits="userSpaceOnUse" x1="0" x2="0">
+        <stop offset="0" stop-color="#a8977a"></stop>
+        <stop offset="0.5" stop-color="#a3a578"></stop>
+        <stop offset="1" stop-color="#c9e6a0"></stop>
+      </linearGradient>
+      <linearGradient id="ivy-pr" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#6d4f5c"></stop>
+        <stop offset="0.35" stop-color="#7b6c4c"></stop>
+        <stop offset="1" stop-color="#8aa85a"></stop>
+      </linearGradient>
+      <linearGradient id="ivy-pl" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0" stop-color="#6d4f5c"></stop>
+        <stop offset="0.35" stop-color="#7b6c4c"></stop>
+        <stop offset="1" stop-color="#8aa85a"></stop>
+      </linearGradient>
+    </defs>
+    <g data-vine-body></g>
+  </svg>
+
+  <div class="rail-head">
+    <span data-logo-click title="Ivy" class="logo-sigil">
+      <span class="logo-halo"></span>
       <img
         data-medallion
         data-logo-leaf
         src="/assets/ivy-logo.webp"
         alt="Ivy"
-        style="position:relative;width:34px;height:34px;border-radius:10px;box-shadow:0 0 0 1px var(--border),0 4px 14px -4px rgba(168,92,255,.7)"
+        class="logo-img"
       >
     </span>
     <span
@@ -36,13 +98,13 @@ const activeKey = "about";
     </span>
   </div>
 
-  <div style="margin-bottom:clamp(10px,1.6vh,20px);flex:0 0 auto">
+  <div class="rail-intro" data-rail-intro>
     <div
       style="font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px"
     >
       Software Engineer · Co-Founder
     </div>
-    <p style="color:var(--text-dim);font-size:14.5px;line-height:1.55;margin:0">
+    <p style="color:var(--text-dim);font-size:14.5px;line-height:1.58;margin:0">
       I build thoughtful products end to end — fullstack, increasingly with AI.
       Six years in, I care most about shipping things that genuinely help people
       — and I co-founded Ivy, a platform for artists and the people who
@@ -50,67 +112,13 @@ const activeKey = "about";
     </p>
   </div>
 
-  <nav
-    aria-label="Sections"
-    style="position:relative;z-index:1;flex:1 1 auto;min-height:0;overflow:visible;display:flex;flex-direction:column;justify-content:space-evenly;gap:0;padding-left:10px"
-  >
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 52 1000"
-      preserveAspectRatio="none"
-      style="position:absolute;left:0;top:0;bottom:0;height:100%;width:52px;overflow:visible;pointer-events:none;z-index:0"
-    >
-      <path
-        data-vine
-        d={vinePath}
-        fill="none"
-        stroke="#100a18"
-        stroke-width="9"
-        stroke-linecap="round"
-        vector-effect="non-scaling-stroke"
-        opacity=".85"
-      ></path>
-      <path
-        data-vine
-        d={vinePath}
-        fill="none"
-        stroke="var(--vine)"
-        stroke-width="5.5"
-        stroke-linecap="round"
-        vector-effect="non-scaling-stroke"
-        opacity=".95"
-      ></path>
-      <path
-        data-vine
-        d={vinePath}
-        fill="none"
-        stroke="rgba(255,255,255,.28)"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        vector-effect="non-scaling-stroke"
-        style="transform:translate(-1.6px,-1px)"
-      ></path>
-      <path
-        data-vine
-        d={vinePath}
-        fill="none"
-        stroke="var(--leaf)"
-        stroke-width="1.1"
-        stroke-linecap="round"
-        stroke-dasharray="3 13"
-        vector-effect="non-scaling-stroke"
-        opacity=".45"
-        style="transform:translate(1.8px,1px)"
-      ></path>
-    </svg>
-
-    {sectionMeta.map((it, i) => (
+  <nav aria-label="Sections" class="rail-nav">
+    {rows.map((it) => (
       <button
         type="button"
         class="nav-item"
         data-nav={it.key}
-        data-active={it.key === activeKey ? "" : undefined}
-        style={`--leaf-dx:${vineAmps[i]}px;--leaf-rot:${i % 2 === 0 ? -14 : 14}deg`}
+        data-active={it.active ? "" : undefined}
       >
         <span class="nav-dagger-outline" />
         <span class="nav-dagger-fill" />
@@ -124,22 +132,32 @@ const activeKey = "about";
             <path
               d="M0 0.8 L16.2 50 L0 99.2"
               fill="none"
-              stroke="var(--gold)"
-              stroke-width="1.5"
+              stroke="rgba(216,180,106,.95)"
+              stroke-width="1.3"
               vector-effect="non-scaling-stroke"
             />
           </svg>
         </span>
-        <span class="nav-leaf-wrap" data-leaf>
-          <svg aria-hidden="true" viewBox="0 0 100 100" class="nav-leaf">
-            <use href="#ivy-leaf" />
-          </svg>
+        <span class="nav-leaf-wrap" data-leaf style={it.style}>
+          <span class="nav-leaf-glow" />
+          <img
+            class="nav-leaf"
+            src={it.src}
+            alt=""
+            width={it.leaf.w}
+            height={it.leaf.h}
+            decoding="async"
+          >
+          <span
+            class="nav-leaf-junction"
+            data-junction
+            data-petiole={it.petiole}
+            data-image-per-length={it.perLength.toFixed(4)}
+          />
         </span>
         <span style="position:relative;z-index:1;display:flex;flex-direction:column;line-height:1.08;min-width:0">
           <span class="nav-label">
-            <span style="font-family:var(--f-mono);font-size:11px;opacity:.6;margin-right:7px">
-              {it.n}
-            </span>
+            <span class="nav-num">{it.n}</span>
             {it.label}
           </span>
           <span style="font-family:var(--f-mono);font-size:11px;color:var(--text-faint);letter-spacing:.02em;white-space:nowrap">
@@ -150,9 +168,7 @@ const activeKey = "about";
     ))}
   </nav>
 
-  <div
-    style="margin-top:clamp(12px,2vh,22px);display:flex;gap:16px;font-family:var(--f-mono);font-size:11px;color:var(--text-faint)"
-  >
+  <div class="rail-foot">
     <a
       href="https://github.com/Wordllban"
       target="_blank"

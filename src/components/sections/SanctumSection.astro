@@ -21,21 +21,21 @@ const defaultOpen = "garden";
   >
     {sanctum.map((c) => (
       <article
-        class="sanctum-card"
+        class="sanctum-card card-edge"
         data-sanctum-card={c.key}
         data-roll={c.roll ? "" : undefined}
         data-open={c.key === defaultOpen ? "" : undefined}
       >
         <div class="sanctum-id" data-sanctum-toggle>
           <div style="display:flex;align-items:center;gap:11px;margin-bottom:11px">
-            <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--gold);border:1px solid var(--border);padding:5px 8px;line-height:1;flex:0 0 auto">
+            <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(216,180,106,.42);background:rgba(216,180,106,.06);padding:5px 8px;line-height:1;flex:0 0 auto">
               {c.mark}
             </span>
             <h3 style="font-family:var(--f-display);font-size:19px;margin:0;line-height:1.1">
               {c.title}
             </h3>
           </div>
-          <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.65;flex:0 1 auto;overflow:hidden">
+          <p style="color:var(--text-dim);font-size:14px;margin:0;line-height:1.66;flex:0 1 auto;overflow:hidden">
             {c.desc}
           </p>
           <div style="margin-top:auto;padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px">
@@ -51,9 +51,9 @@ const defaultOpen = "garden";
           </div>
         </div>
         <div class="sanctum-wells">
-          <div class="sanctum-well sanctum-well-1">{c.ph[0]}</div>
-          <div class="sanctum-well sanctum-well-2">{c.ph[1]}</div>
-          <div class="sanctum-well sanctum-well-3">{c.ph[2]}</div>
+          <div class="sanctum-well sanctum-well-1 placeholder">{c.ph[0]}</div>
+          <div class="sanctum-well sanctum-well-2 placeholder">{c.ph[1]}</div>
+          <div class="sanctum-well sanctum-well-3 placeholder">{c.ph[2]}</div>
         </div>
       </article>
     ))}

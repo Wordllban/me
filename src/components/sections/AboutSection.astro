@@ -1,5 +1,6 @@
 ---
 import { facts } from "../../data/portfolio";
+import IvyLeaf from "../IvyLeaf.astro";
 import SectionHeader from "./SectionHeader.astro";
 ---
 
@@ -18,7 +19,7 @@ import SectionHeader from "./SectionHeader.astro";
       style="flex:1;min-height:0;overflow:hidden;display:flex;gap:clamp(22px,3vw,40px);align-items:stretch"
     >
       <div style="flex:1;min-width:0;display:flex;flex-direction:column">
-        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.65">
+        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.66">
           I build products end to end — fullstack, increasingly with AI — and I
           co-founded
           <strong style="color:var(--text);font-weight:600">Ivy</strong>, a
@@ -26,24 +27,24 @@ import SectionHeader from "./SectionHeader.astro";
           Six years in, across product teams and outstaff work, I care most
           about shipping things that genuinely help people.
         </p>
-        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.65">
+        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.66">
           I'm learning to lead with empathy, and to be openly fond of soft,
           cute, joyful things — a strength, not something to hide. I love
           Japan's design culture and its anime, and borrow their care for detail
           in everything I make.
         </p>
-        <p style="color:var(--text-dim);margin:0;line-height:1.65">
+        <p style="color:var(--text-dim);margin:0;line-height:1.66">
           When I share what I make, it's not a flex — it's breadcrumbs, hoping
           to nudge someone else to start their own thing.
         </p>
       </div>
       <div
         data-about-portrait
-        class="tt"
-        style="flex:0 0 clamp(250px,30vw,360px);position:relative;height:100%;min-height:150px;border-radius:var(--radius);border:1px dashed var(--border);background:repeating-linear-gradient(45deg,var(--panel-2) 0 11px,transparent 11px 22px);display:grid;place-items:center"
+        class="placeholder tt"
+        style="flex:0 0 clamp(250px,30vw,360px);position:relative;height:100%;min-height:150px;display:grid;place-items:center"
       >
         <span
-          style="font-family:var(--f-mono);font-size:11.5px;color:var(--text-faint)"
+          style="font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-faint)"
         >
           [ portrait ]
         </span>
@@ -51,32 +52,18 @@ import SectionHeader from "./SectionHeader.astro";
     </div>
 
     <div
-      style="flex:0 0 auto;position:relative;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,rgba(124,77,255,.08),rgba(28,20,42,.4));padding:clamp(15px,1.7vw,20px) clamp(16px,1.8vw,22px);box-shadow:var(--shadow)"
-      class="tt"
+      style="flex:0 0 auto;position:relative;padding:clamp(15px,1.7vw,20px) clamp(16px,1.8vw,22px)"
+      class="card-edge card-feature tt"
     >
-      <span
-        style="position:absolute;top:9px;left:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"
-      ></span>
-      <span
-        style="position:absolute;top:9px;right:9px;width:13px;height:13px;border-top:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"
-      ></span>
-      <span
-        style="position:absolute;bottom:9px;left:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-left:1.5px solid var(--gold);opacity:var(--bracket-op)"
-      ></span>
-      <span
-        style="position:absolute;bottom:9px;right:9px;width:13px;height:13px;border-bottom:1.5px solid var(--gold);border-right:1.5px solid var(--gold);opacity:var(--bracket-op)"
-      ></span>
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
       <div
         style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px"
       >
-        <div style="display:flex;align-items:center;gap:9px">
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 100 100"
-            style="width:19px;height:19px;filter:drop-shadow(0 0 6px var(--leaf))"
-          >
-            <use href="#ivy-leaf"></use>
-          </svg>
+        <div style="display:flex;align-items:center;gap:8px">
+          <IvyLeaf variant="u4" size={24} length={18} />
           <span
             style="font-family:var(--f-display);font-size:15px;letter-spacing:.05em"
           >
@@ -86,8 +73,7 @@ import SectionHeader from "./SectionHeader.astro";
         <a
           href="/assets/kostiantyn-mininkov-cv.pdf"
           download
-          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--border);padding:6px 13px;border-radius:999px"
-          class="tt"
+          class="gold-pill tt"
         >
           Download CV ↓
         </a>
@@ -97,7 +83,10 @@ import SectionHeader from "./SectionHeader.astro";
         style="display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.8vw,26px)"
       >
         {facts.map((s) => (
-          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:2px 0 2px 15px;border-left:1px solid var(--border)">
+          <div
+            class="fact-rule"
+            style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:2px 0 2px 15px"
+          >
             <span style="font-family:var(--f-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">
               {s.label}
             </span>

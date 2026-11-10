@@ -1,6 +1,41 @@
 ---
+import type { IvyVariant } from "../../data/ivy";
 import { timeline, ventures } from "../../data/portfolio";
+import IvyLeaf from "../IvyLeaf.astro";
 import SectionHeader from "./SectionHeader.astro";
+
+// Corporate work grows green ivy; ventures grow the violet 'Atropurpurea' kind.
+const columns = [
+  {
+    label: "Corporate · the craft",
+    color: "var(--gold)",
+    years: "var(--accent-2)",
+    line: "var(--border)",
+    rule: "label-rule",
+    mark: "u5",
+    leaves: ["u2", "u6", "u3", "u7", "u1", "u4"],
+    jobs: timeline,
+  },
+  {
+    label: "Venture · the founder",
+    color: "var(--accent)",
+    years: "var(--accent)",
+    line: "var(--border-2)",
+    rule: "label-rule label-rule-violet",
+    mark: "v1",
+    leaves: ["v1", "v2", "v3"],
+    jobs: ventures,
+  },
+] satisfies {
+  label: string;
+  color: string;
+  years: string;
+  line: string;
+  rule: string;
+  mark: IvyVariant;
+  leaves: IvyVariant[];
+  jobs: typeof timeline;
+}[];
 ---
 
 <div class="section" data-section="path">
@@ -14,104 +49,47 @@ import SectionHeader from "./SectionHeader.astro";
     data-path-grid
     style="flex:1;min-height:0;padding-left:10px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr);gap:clamp(22px,3vw,48px);align-items:stretch"
   >
-    <!-- Corporate -->
-    <div style="display:flex;flex-direction:column;min-height:0">
-      <div
-        style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto"
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 100 100"
-          style="width:16px;height:16px;flex:0 0 auto;filter:drop-shadow(0 0 6px var(--leaf))"
-        >
-          <use href="#ivy-leaf"></use>
-        </svg>
-        <span
-          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)"
-        >
-          Corporate · the craft
-        </span>
-        <span
-          style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)"
-        ></span>
-      </div>
-      <div style="flex:1;min-height:0;overflow-y:auto;padding:0 6px 0 40px">
-        <div
-          style="border-left:2px solid var(--border);padding-left:26px;margin-left:6px"
-        >
-          {timeline.map((job) => (
-            <div style="position:relative;padding:0 0 24px">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 100 100"
-                style="position:absolute;left:-36px;top:1px;width:18px;height:18px"
-              >
-                <use href="#ivy-leaf" />
-              </svg>
-              <div style="font-family:var(--f-mono);font-size:11.5px;color:var(--accent-2);margin-bottom:4px">
-                {job.years}
+    {columns.map((col) => (
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:20px;flex:0 0 auto">
+          <IvyLeaf variant={col.mark} size={20} length={15} />
+          <span
+            style={`font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:${col.color}`}
+          >
+            {col.label}
+          </span>
+          <span class={col.rule} />
+        </div>
+        <div style="flex:1;min-height:0;overflow-y:auto;padding:0 6px 0 40px">
+          <div
+            style={`border-left:2px solid ${col.line};padding-left:26px;margin-left:6px`}
+          >
+            {col.jobs.map((job, i) => (
+              <div style="position:relative;padding:0 0 24px">
+                <IvyLeaf
+                  variant={col.leaves[i % col.leaves.length]}
+                  size={22}
+                  length={16}
+                  glow={i === 0}
+                  style="position:absolute;left:-38px;top:-1px"
+                />
+                <div
+                  style={`font-family:var(--f-mono);font-size:11.5px;color:${col.years};margin-bottom:4px`}
+                >
+                  {job.years}
+                </div>
+                <div style="font-family:var(--f-display);font-size:18px">
+                  {job.role}{" "}
+                  <span style="color:var(--text-faint)">· {job.org}</span>
+                </div>
+                <p style="color:var(--text-dim);margin:6px 0 0;font-size:13.5px;line-height:1.6">
+                  {job.note}
+                </p>
               </div>
-              <div style="font-family:var(--f-display);font-size:18px">
-                {job.role}{" "}
-                <span style="color:var(--text-faint)">· {job.org}</span>
-              </div>
-              <p style="color:var(--text-dim);margin:6px 0 0;font-size:13.5px;line-height:1.6">
-                {job.note}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Entrepreneurship -->
-    <div style="display:flex;flex-direction:column;min-height:0">
-      <div
-        style="display:flex;align-items:center;gap:11px;margin-bottom:20px;flex:0 0 auto"
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 100 100"
-          style="width:16px;height:16px;flex:0 0 auto;--leaf:var(--accent);filter:drop-shadow(0 0 7px var(--accent))"
-        >
-          <use href="#ivy-leaf"></use>
-        </svg>
-        <span
-          style="font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)"
-        >
-          Venture · the founder
-        </span>
-        <span
-          style="flex:1;height:1px;background:linear-gradient(90deg,var(--border-2),transparent)"
-        ></span>
-      </div>
-      <div style="flex:1;min-height:0;overflow-y:auto;padding:0 6px 0 40px">
-        <div
-          style="border-left:2px solid var(--border-2);padding-left:26px;margin-left:6px"
-        >
-          {ventures.map((job) => (
-            <div style="position:relative;padding:0 0 24px">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 100 100"
-                style="position:absolute;left:-36px;top:1px;width:18px;height:18px;--leaf:var(--accent);filter:drop-shadow(0 0 6px var(--accent))"
-              >
-                <use href="#ivy-leaf" />
-              </svg>
-              <div style="font-family:var(--f-mono);font-size:11.5px;color:var(--accent);margin-bottom:4px">
-                {job.years}
-              </div>
-              <div style="font-family:var(--f-display);font-size:18px">
-                {job.role}{" "}
-                <span style="color:var(--text-faint)">· {job.org}</span>
-              </div>
-              <p style="color:var(--text-dim);margin:6px 0 0;font-size:13.5px;line-height:1.6">
-                {job.note}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    ))}
   </div>
 </div>

@@ -1,5 +1,6 @@
 ---
-// Background decor: grid, drifting glows, scanlines, embers layer, vignette.
+// Background decor: grid fading toward the edges, drifting glows, faint
+// scanlines, embers layer, vignette.
 ---
 
 <div
@@ -7,13 +8,13 @@
   style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden"
 >
   <div
-    style="position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:46px 46px;opacity:var(--grid-op)"
+    style="position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:46px 46px;opacity:var(--grid-op);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 62% 40%,#000 35%,transparent 100%);mask-image:radial-gradient(ellipse 80% 70% at 62% 40%,#000 35%,transparent 100%)"
   ></div>
   <div
-    style="position:absolute;top:-18%;right:-8%;width:48vw;height:48vw;border-radius:50%;background:radial-gradient(circle,var(--glow1),transparent 60%);opacity:var(--glow-op);animation:drift 20s ease-in-out infinite"
+    style="position:absolute;top:-18%;right:-8%;width:48vw;height:48vw;border-radius:50%;background:radial-gradient(circle,var(--glow1),transparent 62%);opacity:var(--glow-op);animation:drift 20s ease-in-out infinite"
   ></div>
   <div
-    style="position:absolute;bottom:-22%;left:-10%;width:44vw;height:44vw;border-radius:50%;background:radial-gradient(circle,var(--glow2),transparent 60%);opacity:var(--glow-op);animation:drift 26s ease-in-out infinite reverse"
+    style="position:absolute;bottom:-22%;left:-10%;width:44vw;height:44vw;border-radius:50%;background:radial-gradient(circle,var(--glow2),transparent 62%);opacity:var(--glow-op);animation:drift 26s ease-in-out infinite reverse"
   ></div>
   <div
     style="position:absolute;inset:0;opacity:var(--scan-op);background:repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px)"

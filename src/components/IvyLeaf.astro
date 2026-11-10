@@ -1,0 +1,44 @@
+---
+// One real ivy leaf as a decorative icon, centred in a square box.
+import { type IvyVariant, ivyLeaves, ivyScale, ivySrc } from "../data/ivy";
+
+interface Props {
+  variant: IvyVariant;
+  /** box size in px */
+  size: number;
+  /** terminal lobe length in px */
+  length: number;
+  rotate?: number;
+  glow?: boolean;
+  class?: string;
+  style?: string;
+}
+
+const {
+  variant,
+  size,
+  length,
+  rotate = 0,
+  glow = false,
+  class: className,
+  style = "",
+} = Astro.props;
+const leaf = ivyLeaves[variant];
+const width = Math.round(leaf.w * ivyScale(variant, length) * 10) / 10;
+---
+
+<span
+  class:list={["ivy-icon", className]}
+  data-glow={glow ? "" : undefined}
+  style={`--size:${size}px;--rot:${rotate}deg;${style}`}
+  aria-hidden="true"
+>
+  <img
+    src={ivySrc(variant)}
+    alt=""
+    width={leaf.w}
+    height={leaf.h}
+    decoding="async"
+    style={`width:${width}px`}
+  >
+</span>

@@ -1,11 +1,16 @@
 // Client-side interactivity for the Dark Fantasy portfolio.
 // Ported from the design concept's DCLogic (rewritten as framework-free DOM code).
+import { ivySrc, uprightLeaves } from "../data/ivy";
 import { sectionMeta } from "../data/portfolio";
+import { initVine } from "./vine";
 
 const ORDER = ["about", "path", "work", "give", "wins", "corner", "contact"];
 
 const root = document.querySelector<HTMLElement>("[data-root]");
-if (root) init(root);
+if (root) {
+  init(root);
+  initVine(root);
+}
 
 function detectLayout(): "mobile" | "tablet" | "desktop" {
   const w = window.innerWidth;
@@ -143,58 +148,6 @@ function init(root: HTMLElement) {
     } else if (e.key === "Escape") closeSheet();
   });
 
-  // ---------- vine routed through the real measured leaf positions ----------
-  function splinePath(pts: [number, number][]) {
-    const r = (v: number) => Math.round(v * 10) / 10;
-    let d = `M${r(pts[0][0])},${r(pts[0][1])}`;
-    for (let i = 0; i < pts.length - 1; i++) {
-      const p0 = pts[i - 1] || pts[i];
-      const p1 = pts[i];
-      const p2 = pts[i + 1];
-      const p3 = pts[i + 2] || pts[i + 1];
-      const c1x = p1[0] + (p2[0] - p0[0]) / 6;
-      const c1y = p1[1] + (p2[1] - p0[1]) / 6;
-      const c2x = p2[0] - (p3[0] - p1[0]) / 6;
-      const c2y = p2[1] - (p3[1] - p1[1]) / 6;
-      d +=
-        " C" +
-        r(c1x) +
-        "," +
-        r(c1y) +
-        " " +
-        r(c2x) +
-        "," +
-        r(c2y) +
-        " " +
-        r(p2[0]) +
-        "," +
-        r(p2[1]);
-    }
-    return d;
-  }
-  function measureVine() {
-    const nav = root.querySelector('nav[aria-label="Sections"]');
-    const paths = [...root.querySelectorAll("path[data-vine]")];
-    if (!nav || !paths.length) return;
-    const nb = nav.getBoundingClientRect();
-    if (!nb.height) return;
-    const leaves = [...nav.querySelectorAll("button")]
-      .map((b) => {
-        const sv = b.querySelector("[data-leaf] svg");
-        if (!sv) return null;
-        const r = sv.getBoundingClientRect();
-        return [
-          r.left + r.width / 2 - nb.left,
-          ((r.top + r.height / 2 - nb.top) / nb.height) * 1000,
-        ] as [number, number];
-      })
-      .filter((x): x is [number, number] => x !== null);
-    if (leaves.length < 2) return;
-    const edge = -46;
-    const d = splinePath([[edge, -34], ...leaves, [edge, 1034]]);
-    for (const p of paths) p.setAttribute("d", d);
-  }
-
   // ---------- easter-egg FX ----------
   let fx: HTMLElement | null = null;
   function ensureFX() {
@@ -206,28 +159,20 @@ function init(root: HTMLElement) {
     fx = d;
     return d;
   }
-  function leafSVG(size: number, color: string) {
-    const ns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(ns, "svg");
-    svg.setAttribute("viewBox", "0 0 100 100");
-    svg.style.width = `${size}px`;
-    svg.style.height = `${size}px`;
-    svg.style.setProperty("--leaf", color);
-    svg.style.setProperty("--vein", "rgba(255,255,255,.45)");
-    svg.style.filter = `drop-shadow(0 4px 10px ${color}66)`;
-    const use = document.createElementNS(ns, "use");
-    use.setAttribute("href", "#ivy-leaf");
-    svg.appendChild(use);
-    return svg;
+  function leafImage(i: number, size: number) {
+    const img = document.createElement("img");
+    img.src = ivySrc(uprightLeaves[i % uprightLeaves.length]);
+    img.alt = "";
+    img.style.cssText = `display:block;width:${size}px;height:auto`;
+    return img;
   }
   function spawnLeafRain(n: number) {
     const layer = ensureFX();
-    const cols = ["#79c98f", "#a9e6ba", "#a85cff"];
     for (let i = 0; i < n; i++) {
       const wrap = document.createElement("div");
-      const size = 14 + Math.random() * 24;
+      const size = 22 + Math.random() * 36;
       wrap.style.cssText = `position:absolute;top:-60px;left:${Math.random() * 100}vw`;
-      wrap.appendChild(leafSVG(size, cols[i % cols.length]));
+      wrap.appendChild(leafImage(i, size));
       const drift = (Math.random() * 2 - 1) * 150;
       const rot = (Math.random() * 2 - 1) * 780;
       const dur = 3200 + Math.random() * 2800;
@@ -550,16 +495,8 @@ function init(root: HTMLElement) {
 
   // ---------- boot ----------
   applySection(section);
-  measureVine();
-  requestAnimationFrame(measureVine);
-  document.fonts?.ready?.then(measureVine);
-  if (window.ResizeObserver) {
-    const nav = root.querySelector('nav[aria-label="Sections"]');
-    if (nav) new ResizeObserver(measureVine).observe(nav);
-  }
   window.addEventListener("resize", () => {
     layout = detectLayout();
     if (layout === "desktop") closeSheet(); // the sheet is a mobile/tablet affordance
-    measureVine();
   });
 }
