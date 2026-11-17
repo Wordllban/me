@@ -1054,27 +1054,33 @@ a {
 /* instead of each section body being its own scroll box. The desktop    */
 /* fixed-console layout is untouched. Placed last so its !important wins. */
 /* ===================================================================== */
+/* desktop stacks sections in the stage; slides only exist below 1000px */
+.slide {
+  display: contents;
+}
+
+/* mobile / tablet : a native swipe carousel, one chapter per page */
 @media (max-width: 999px) {
-  html,
-  body {
-    height: auto !important;
-    overflow: visible !important;
-  }
-  body {
-    overflow-x: hidden !important;
-  }
-  [data-screen-label="Portfolio"] {
-    height: auto !important;
-    min-height: 100dvh;
-    overflow: visible !important;
-  }
-  /* keep the decor a fixed backdrop rather than stretching down the page */
-  [data-bg] {
-    position: fixed !important;
-  }
-  /* the active section flows into the document; inactive ones are removed */
   [data-stage] {
-    overflow: visible !important;
+    display: flex;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  [data-stage]::-webkit-scrollbar {
+    display: none;
+  }
+  .slide {
+    display: block;
+    flex: 0 0 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     padding-bottom: 88px; /* clear the fixed page-turner nav */
   }
   [data-section] {
@@ -1084,15 +1090,12 @@ a {
     transform: none !important;
     height: auto;
     transition: none;
-  }
-  [data-section]:not([data-active]) {
-    display: none !important;
+    pointer-events: auto;
   }
   [data-body] {
     overflow: visible !important;
     min-height: 0 !important;
   }
-  /* the page-turner stays pinned so chapters are always reachable */
   [data-bottomnav] {
     position: fixed !important;
     left: 0;

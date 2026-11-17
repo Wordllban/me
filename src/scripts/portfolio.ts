@@ -83,13 +83,11 @@ function init(root: HTMLElement) {
       else b.removeAttribute("data-active");
     });
     updatePager(key);
-    // On mobile/tablet the whole document scrolls, so reset it to the top
-    // when the chapter changes (the desktop console scrolls per-section body).
-    if (layout !== "desktop") window.scrollTo(0, 0);
   }
   function setSection(key: string) {
     section = key;
     applySection(key);
+    if (layout !== "desktop") showSlide(key, true);
   }
   function closeSheet() {
     navSheet?.removeAttribute("data-open");
@@ -439,64 +437,49 @@ function init(root: HTMLElement) {
     }
   });
 
-  // ---------- swipe navigation (mobile / tablet only) ----------
-  // Only a deliberate horizontal drag advances; a tap or vertical scroll never does.
+  // ---------- swipe carousel (mobile / tablet only) ----------
+  // The stage scrolls natively with snap points; scroll position drives the chapter.
   const stage = root.querySelector<HTMLElement>("[data-stage]");
-  if (stage) {
-    let touch: { x: number; y: number; t: number; lock: number } | null = null;
-    stage.addEventListener(
-      "touchstart",
-      (e) => {
-        if (layout === "desktop") {
-          touch = null;
-          return;
-        }
-        const target = e.target as HTMLElement;
-        if (
-          target.closest?.(
-            "[data-bottomnav],[data-nav-sheet],button,a,input,textarea,[data-sanctum-card]"
-          )
-        ) {
-          touch = null;
-          return;
-        }
-        const t = e.touches[0];
-        touch = { x: t.clientX, y: t.clientY, t: Date.now(), lock: 0 }; // lock: 0 undecided, 1 horizontal, -1 vertical
-      },
-      { passive: true }
-    );
-    stage.addEventListener(
-      "touchmove",
-      (e) => {
-        if (!touch) return;
-        const t = e.touches[0];
-        const dx = t.clientX - touch.x;
-        const dy = t.clientY - touch.y;
-        if (touch.lock === 0 && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
-          touch.lock = Math.abs(dx) > Math.abs(dy) ? 1 : -1;
-        }
-      },
-      { passive: true }
-    );
-    stage.addEventListener(
-      "touchend",
-      (e) => {
-        const s = touch;
-        touch = null;
-        if (!s || layout === "desktop" || s.lock !== 1) return;
-        const t = e.changedTouches[0];
-        const dx = t.clientX - s.x;
-        if (Date.now() - s.t > 800 || Math.abs(dx) < 60) return;
-        step(dx < 0 ? 1 : -1);
-      },
-      { passive: true }
-    );
+  const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function showSlide(key: string, animate: boolean) {
+    const i = ORDER.indexOf(key);
+    if (!stage || i < 0) return;
+    const slide = slides[i];
+    if (animate && slide) slide.scrollTop = 0;
+    stage.scrollTo({
+      left: i * stage.clientWidth,
+      behavior: animate && !reducedMotion.matches ? "smooth" : "instant",
+    });
   }
+
+  let scrollFrame = 0;
+  stage?.addEventListener(
+    "scroll",
+    () => {
+      if (layout === "desktop" || scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const i = Math.round(stage.scrollLeft / stage.clientWidth);
+        const key = ORDER[i];
+        if (key && key !== section) {
+          section = key;
+          applySection(key);
+        }
+      });
+    },
+    { passive: true }
+  );
 
   // ---------- boot ----------
   applySection(section);
   window.addEventListener("resize", () => {
     layout = detectLayout();
-    if (layout === "desktop") closeSheet(); // the sheet is a mobile/tablet affordance
+    if (layout === "desktop") {
+      closeSheet(); // the sheet is a mobile/tablet affordance
+    } else {
+      showSlide(section, false);
+    }
   });
 }
