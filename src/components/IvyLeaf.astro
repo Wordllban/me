@@ -1,6 +1,9 @@
 ---
 // One real ivy leaf as a decorative icon, centred in a square box.
-import { type IvyVariant, ivyLeaves, ivyScale, ivySrc } from "../data/ivy";
+
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { type IvyVariant, ivyLeaves, ivyPath, ivyScale } from "../data/ivy";
 
 interface Props {
   variant: IvyVariant;
@@ -25,6 +28,12 @@ const {
 } = Astro.props;
 const leaf = ivyLeaves[variant];
 const width = Math.round(leaf.w * ivyScale(variant, length) * 10) / 10;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/ivy/*.webp",
+  { eager: true }
+);
+const image = images[ivyPath(variant)]?.default;
+if (!image) throw new Error(`Missing ivy leaf image: ${variant}`);
 ---
 
 <span
@@ -33,12 +42,13 @@ const width = Math.round(leaf.w * ivyScale(variant, length) * 10) / 10;
   style={`--size:${size}px;--rot:${rotate}deg;${style}`}
   aria-hidden="true"
 >
-  <img
-    src={ivySrc(variant)}
+  <Image
+    src={image}
     alt=""
-    width={leaf.w}
-    height={leaf.h}
+    width={Math.ceil(width)}
+    densities={[1, 2]}
+    loading="eager"
     decoding="async"
     style={`width:${width}px`}
-  >
+  />
 </span>

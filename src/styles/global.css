@@ -30,9 +30,9 @@
   --radius: 3px;
   --shadow:
     0 0 0 1px rgba(176, 138, 86, 0.16), 0 30px 60px -28px rgba(60, 20, 90, 0.7);
-  --f-display: "Spectral", serif;
-  --f-body: "EB Garamond", Georgia, serif;
-  --f-mono: "JetBrains Mono", monospace;
+  --f-display: var(--font-spectral);
+  --f-body: var(--font-eb-garamond);
+  --f-mono: var(--font-jetbrains-mono);
   --grid-op: 1;
   --glow-op: 0.8;
   --scan-op: 0.07;

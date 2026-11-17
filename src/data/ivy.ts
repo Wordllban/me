@@ -58,8 +58,18 @@ export const uprightLeaves = [
   "u7",
 ] as const satisfies readonly IvyVariant[];
 
+const leafUrls = import.meta.glob<string>("../assets/ivy/*.webp", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+export function ivyPath(variant: IvyVariant): string {
+  return `../assets/ivy/${variant}.webp`;
+}
+
 export function ivySrc(variant: IvyVariant): string {
-  return `/assets/ivy/${variant}.webp`;
+  return leafUrls[ivyPath(variant)] as string;
 }
 
 /** Image px per leaf px, for a leaf whose terminal lobe is `length` px long. */
