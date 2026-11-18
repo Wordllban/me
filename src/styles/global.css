@@ -14,8 +14,8 @@
   --border: rgba(176, 138, 86, 0.3);
   --border-2: rgba(150, 90, 255, 0.32);
   --text: #ece2d2;
-  --text-dim: #b3a48c;
-  --text-faint: #7b6e5b;
+  --text-dim: #c9bba3;
+  --text-faint: #a2947d;
   --accent: #a85cff;
   --accent-2: #d8b46a;
   --gold: #d8b46a;
@@ -31,7 +31,7 @@
   --shadow:
     0 0 0 1px rgba(176, 138, 86, 0.16), 0 30px 60px -28px rgba(60, 20, 90, 0.7);
   --f-display: var(--font-spectral);
-  --f-body: var(--font-eb-garamond);
+  --f-body: var(--font-spectral);
   --f-mono: var(--font-jetbrains-mono);
   --grid-op: 1;
   --glow-op: 0.8;
@@ -160,14 +160,17 @@ a {
   animation: tremble 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
-[data-body]::-webkit-scrollbar {
+[data-body]::-webkit-scrollbar,
+[data-about-text]::-webkit-scrollbar {
   width: 7px;
 }
-[data-body]::-webkit-scrollbar-thumb {
+[data-body]::-webkit-scrollbar-thumb,
+[data-about-text]::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 99px;
 }
-[data-body] {
+[data-body],
+[data-about-text] {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
@@ -437,7 +440,7 @@ a {
 .nav-num {
   font-family: var(--f-mono);
   font-size: 11px;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-right: 3px;
 }
 
@@ -574,7 +577,7 @@ a {
 }
 .gold-pill {
   font-family: var(--f-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold);
@@ -702,7 +705,7 @@ a {
 }
 .sanctum-cue {
   font-family: var(--f-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--text-faint);
   white-space: nowrap;
@@ -1002,7 +1005,7 @@ a {
 }
 .nav-row-desc {
   font-family: var(--f-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--text-faint);
 }
@@ -1044,7 +1047,7 @@ a {
     opacity: 1;
     pointer-events: auto;
     transform: none;
-    font-size: 10px;
+    font-size: 11px;
     transition: none;
   }
 }
@@ -1061,6 +1064,9 @@ a {
 
 /* mobile / tablet : a native swipe carousel, one chapter per page */
 @media (max-width: 999px) {
+  [data-root] {
+    font-size: 16px;
+  }
   [data-stage] {
     display: flex;
     overflow-x: auto !important;
@@ -1092,7 +1098,8 @@ a {
     transition: none;
     pointer-events: auto;
   }
-  [data-body] {
+  [data-body],
+  [data-about-text] {
     overflow: visible !important;
     min-height: 0 !important;
   }

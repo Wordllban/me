@@ -18,8 +18,11 @@ import SectionHeader from "./SectionHeader.astro";
       data-about-row
       style="flex:1;min-height:0;overflow:hidden;display:flex;gap:clamp(22px,3vw,40px);align-items:stretch"
     >
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
-        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.66">
+      <div
+        data-about-text
+        style="flex:1;min-width:0;min-height:0;overflow-y:auto;padding-right:6px;display:flex;flex-direction:column"
+      >
+        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.7">
           I build products end to end — fullstack, increasingly with AI — and I
           co-founded
           <strong style="color:var(--text);font-weight:600">Ivy</strong>, a
@@ -27,13 +30,13 @@ import SectionHeader from "./SectionHeader.astro";
           Six years in, across product teams and outstaff work, I care most
           about shipping things that genuinely help people.
         </p>
-        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.66">
+        <p style="color:var(--text-dim);margin:0 0 12px;line-height:1.7">
           I'm learning to lead with empathy, and to be openly fond of soft,
           cute, joyful things — a strength, not something to hide. I love
           Japan's design culture and its anime, and borrow their care for detail
           in everything I make.
         </p>
-        <p style="color:var(--text-dim);margin:0;line-height:1.66">
+        <p style="color:var(--text-dim);margin:0;line-height:1.7">
           When I share what I make, it's not a flex — it's breadcrumbs, hoping
           to nudge someone else to start their own thing.
         </p>
@@ -87,13 +90,13 @@ import SectionHeader from "./SectionHeader.astro";
             class="fact-rule"
             style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:2px 0 2px 15px"
           >
-            <span style="font-family:var(--f-mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">
+            <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)">
               {s.label}
             </span>
             <span style="font-family:var(--f-display);font-weight:600;font-size:clamp(17px,1.7vw,22px);line-height:1.05;color:var(--text)">
               {s.value}
             </span>
-            <span style="font-family:var(--f-mono);font-size:9.5px;letter-spacing:.02em;color:var(--text-faint)">
+            <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:var(--text-faint)">
               {s.sub}
             </span>
           </div>
